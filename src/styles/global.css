@@ -112,7 +112,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .step:last-child::after { display: none; }
 .step.is-done { color: var(--text); }
-.step.is-done .step__mark { background: rgba(0, 229, 255, 0.18); border-color: var(--primary); color: var(--primary); }
+.step.is-done .step__mark { background: #0d3b4e; border-color: var(--primary); color: var(--primary); }
 .step.is-done::after { background: var(--primary); }
 .step.is-active { color: var(--primary); }
 .step.is-active .step__mark { border-color: var(--primary); color: var(--bg); background: var(--primary); box-shadow: var(--glow); }
