@@ -84,7 +84,7 @@
 @keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 .slots__total { margin-top: 10px; width: 100%; padding: 8px 12px; border: 1px solid var(--science); border-radius: var(--radius-sm); font-weight: 700; color: var(--science); text-align: center; }
 .slots__total[data-empty='true'] { border-color: var(--warning); color: var(--warning); }
-.why { margin-top: 12px; padding: 12px; border: 1px solid rgba(0, 229, 255, 0.4); border-radius: var(--radius-sm); background: rgba(0, 229, 255, 0.05); }
+.why { margin-top: 12px; padding: 12px; border: 1px dashed rgba(0, 229, 255, 0.4); border-radius: var(--radius-sm); background: rgba(0, 229, 255, 0.05); }
 .why__head { text-transform: uppercase; letter-spacing: 0.06em; font-size: 13px; color: var(--primary); }
 .why__title { color: var(--primary-hover); margin-top: 6px; }
 .why__text { font-size: 13.5px; margin-top: 2px; }
