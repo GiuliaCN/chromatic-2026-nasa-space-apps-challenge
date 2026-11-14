@@ -5,7 +5,7 @@
 - Frontend estático (HTML + CSS + JavaScript ES modules + SVG). Sem backend, login, banco, APIs ou chaves.
 - Todo conteúdo e todos os números do jogo estão em JSON (`public/data/`).
 - O jogo é em **inglês**; esta documentação está em português.
-- Os números do jogo são **simplificados e fictícios**. Não são dados reais de dimensionamento aeroespacial.
+- Os números do jogo são **simplificados e fictícios**. Não são dados reais de dimensionamento aeroespacial. 
 
 ## Requisitos e comandos
 
