@@ -8,12 +8,17 @@
       "revisitKey": "orbit.leo.revisit",
       "advantagesKey": "orbit.leo.advantages",
       "disadvantagesKey": "orbit.leo.disadvantages",
-      "observationMultiplierByGoal": { "wildfires": 1.0, "deforestation": 0.9, "airQuality": 1.0 },
-      "launchCostMultiplier": 1.0,
+      "observationMultiplierByGoal": {
+        "wildfires": 1,
+        "deforestation": 0.9,
+        "airQuality": 1
+      },
+      "launchCostMultiplier": 1,
       "eclipseDurationH": 0.6,
       "altitudeKm": 550,
       "inclinationDeg": 53,
-      "visualVariant": "leo"
+      "visualVariant": "leo",
+      "abbrKey": "orbit.leo.abbr"
     },
     {
       "id": "sun-synchronous",
@@ -23,12 +28,17 @@
       "revisitKey": "orbit.sso.revisit",
       "advantagesKey": "orbit.sso.advantages",
       "disadvantagesKey": "orbit.sso.disadvantages",
-      "observationMultiplierByGoal": { "wildfires": 0.9, "deforestation": 1.15, "airQuality": 1.05 },
+      "observationMultiplierByGoal": {
+        "wildfires": 0.9,
+        "deforestation": 1.15,
+        "airQuality": 1.05
+      },
       "launchCostMultiplier": 1.12,
       "eclipseDurationH": 0.4,
       "altitudeKm": 700,
       "inclinationDeg": 98,
-      "visualVariant": "sso"
+      "visualVariant": "sso",
+      "abbrKey": "orbit.sso.abbr"
     },
     {
       "id": "equatorial",
@@ -38,12 +48,17 @@
       "revisitKey": "orbit.equatorial.revisit",
       "advantagesKey": "orbit.equatorial.advantages",
       "disadvantagesKey": "orbit.equatorial.disadvantages",
-      "observationMultiplierByGoal": { "wildfires": 1.15, "deforestation": 1.1, "airQuality": 0.8 },
+      "observationMultiplierByGoal": {
+        "wildfires": 1.15,
+        "deforestation": 1.1,
+        "airQuality": 0.8
+      },
       "launchCostMultiplier": 1.06,
       "eclipseDurationH": 0.8,
       "altitudeKm": 600,
       "inclinationDeg": 0,
-      "visualVariant": "equatorial"
+      "visualVariant": "equatorial",
+      "abbrKey": "orbit.equatorial.abbr"
     }
   ]
 }

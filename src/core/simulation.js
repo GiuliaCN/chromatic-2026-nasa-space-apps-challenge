@@ -265,13 +265,20 @@ function buildInsights(data, selection, core, base) {
     const without = runCore(data, selection, base.seed, new Set([inst.index]));
     return { inst, impact: core.totalScience - without.totalScience };
   });
-  const shown = events
+  // Group repeated occurrences of the same event so the report stays short.
+  const grouped = new Map();
+  for (const { inst, impact } of events) {
+    const g = grouped.get(inst.eventId) ?? { eventId: inst.eventId, months: 0, impact: 0 };
+    g.months += Math.min(inst.endMonth, D) - inst.startMonth + 1;
+    g.impact += impact;
+    grouped.set(inst.eventId, g);
+  }
+  const shown = [...grouped.values()]
     .filter((e) => Math.abs(e.impact) >= 0.5)
-    .sort((a, b) => Math.abs(b.impact) - Math.abs(a.impact))
+    .sort((x, y) => Math.abs(y.impact) - Math.abs(x.impact))
     .slice(0, 3);
-  for (const { inst, impact } of shown) {
-    const name = t(data.byId.events.get(inst.eventId).nameKey);
-    const months = Math.min(inst.endMonth, D) - inst.startMonth + 1;
+  for (const { eventId, months, impact } of shown) {
+    const name = t(data.byId.events.get(eventId).nameKey);
     if (impact < 0) add('hurt', 'eventNegative', { event: name, months, points: r1(-impact) }, impact);
     else add('helped', 'eventPositive', { event: name, months, points: r1(impact) }, impact);
   }

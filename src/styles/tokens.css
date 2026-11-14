@@ -1,0 +1,31 @@
+/* Design tokens: palette from design-jogo.md section 2 (values approximate the reference art). */
+:root {
+  --bg: #030b18;
+  --surface: #07182c;
+  --surface-alt: #0b223b;
+  --border: #17618a;
+  --text: #f1f7ff;
+  --muted: #a9c4d9;
+  --primary: #00e5ff;
+  --primary-hover: #65f4ff;
+  --primary-glow: #00dfff;
+  --secondary: #388bff;
+  --accent-purple: #8554e8;
+  --science: #a66bff;
+  --warning: #ffbf36;
+  --success: #39f58a;
+  --danger: #ff5364;
+  --success-bg: #062c24;
+  --danger-bg: #301321;
+  --disabled: #42566f;
+
+  --radius: 14px;
+  --radius-sm: 9px;
+  --glow: 0 0 0 1px rgba(0, 229, 255, 0.55), 0 0 18px rgba(0, 223, 255, 0.35);
+
+  --font-body: 'Segoe UI', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --font-display: 'Eurostile', 'Bank Gothic', 'Segoe UI Black', 'Arial Black', 'Segoe UI', system-ui, sans-serif;
+
+  --t-fast: 150ms;
+  --t-med: 260ms;
+}

@@ -36,5 +36,6 @@ export function makeTranslator(content) {
   const t = (key, params) => translate(content, key, params);
   t.list = (key, params) => translateList(content, key, params);
   t.has = (key) => lookup(content, key) !== undefined;
+  t.raw = (key) => lookup(content, key);
   return t;
 }

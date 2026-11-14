@@ -126,6 +126,7 @@ export function validateConfig(bundle) {
     checkText(o, label);
     needKey(`${label} coverageKey`, o.coverageKey);
     needKey(`${label} revisitKey`, o.revisitKey);
+    needKey(`${label} abbrKey`, o.abbrKey);
     needList(`${label} advantagesKey`, o.advantagesKey);
     needList(`${label} disadvantagesKey`, o.disadvantagesKey);
     checkNumbers(o, label, ['eclipseDurationH']);

@@ -61,7 +61,10 @@
         "Review the checklist. Blockers must be fixed; warnings are risks you may accept.",
         "Launch, then watch 24 months of operations. Science only counts when data reaches Earth.",
         "Read the debrief to learn how your decisions shaped the result, then try a different design."
-      ]
+      ],
+      "title": "Chromatic",
+      "subtitle": "Design. Decide. Discover.",
+      "footer": ""
     },
     "briefing": {
       "title": "Mission Briefing",
@@ -97,7 +100,8 @@
       "disadvantages": "Disadvantages",
       "observation": "Observation by goal",
       "legendNote": "Orbit profiles are didactic simplifications; a sun-synchronous orbit is itself a kind of low Earth orbit.",
-      "footer": "Your orbit choice changes science per goal, launch cost, battery needs and which launchers can fly."
+      "footer": "Your orbit choice changes science per goal, launch cost, battery needs and which launchers can fly.",
+      "pickFirst": "Choose an orbit profile to see its parameters."
     },
     "payload": {
       "title": "Payload Design",
@@ -119,7 +123,9 @@
       "baseScience": "Science (base)",
       "perGoal": "By goal",
       "none": "No instrument selected yet. Pick at least one.",
-      "footer": "More instruments mean more science, but also more mass, power, data and cost."
+      "footer": "More instruments mean more science, but also more mass, power, data and cost.",
+      "pickFirst": "Select at least one instrument to continue.",
+      "dataShort": "Data"
     },
     "spacecraft": {
       "title": "Spacecraft Design",
@@ -149,7 +155,10 @@
       "tipPower": "Generation must cover demand. Battery only bridges eclipses; it never fixes a generation deficit.",
       "tipComm": "Downlink should be at least the data your instruments produce, or the buffer fills and data is lost.",
       "tipBus": "The bus must support payload + power + comms mass. Storage is a buffer, not a transmission speed.",
-      "footer": "Every subsystem must be balanced for the mission to succeed."
+      "footer": "Every subsystem must be balanced for the mission to succeed.",
+      "pickFirst": "Choose a power system, a communication system and a bus to continue.",
+      "tipLabel": "Tip:",
+      "summaryTitle": "Subsystem check"
     },
     "launch": {
       "title": "Launch Planning",
@@ -164,7 +173,8 @@
       "incompatible": "Cannot reach your orbit",
       "tooHeavy": "Too heavy for this vehicle",
       "fits": "Mass fits",
-      "footer": "Heavier designs need bigger rockets, which cost more. Not every rocket reaches every orbit."
+      "footer": "Heavier designs need bigger rockets, which cost more. Not every rocket reaches every orbit.",
+      "pickFirst": "Choose a launch vehicle to continue."
     },
     "review": {
       "title": "Mission Review",
@@ -181,7 +191,19 @@
       "fixHint": "Fix",
       "allClear": "All hard requirements are met.",
       "warningsNote": "Warnings do not block launch, but they can hurt the result.",
-      "footer": "Warnings can hurt the result, blockers cannot be launched."
+      "footer": "Warnings can hurt the result, blockers cannot be launched.",
+      "check": {
+        "choices": "Mission choices complete",
+        "budget": "Budget",
+        "mass": "Mass limits (launcher and bus)",
+        "orbit": "Launcher reaches the orbit",
+        "power": "Power and battery",
+        "data": "Downlink and storage",
+        "science": "Science forecast",
+        "reliability": "Mission reliability"
+      },
+      "priority": "Scientific priority",
+      "launcher": "Launch vehicle"
     },
     "animation": {
       "title": "Launch",
@@ -269,7 +291,8 @@
       "tryAgain": "Try Again",
       "newMission": "New Mission",
       "mainMenu": "Main menu",
-      "footer": "There is no single best solution. Compare designs and learn from each launch."
+      "footer": "There is no single best solution. Compare designs and learn from each launch.",
+      "eventNoImpact": "No measurable effect on your design"
     }
   },
   "insight": {
@@ -284,8 +307,8 @@
     "powerClean": "Power generation covered every instrument in every month.",
     "batteryShort": "The battery covers only {percent}% of the eclipse energy, so observing time was reduced every month.",
     "batteryOk": "The battery covered each eclipse, so observing time was not reduced.",
-    "eventNegative": "{event} ({months} months) cost about {points} pts.",
-    "eventPositive": "{event} ({months} months) added about {points} pts.",
+    "eventNegative": "{event} ({months} months in total) cost about {points} pts.",
+    "eventPositive": "{event} ({months} months in total) added about {points} pts.",
     "eventNone": "No events occurred, so the result reflects your design alone.",
     "budget": "You used {used}$M of the {budget}$M budget.",
     "reliabilityRisk": "Mission reliability was {percent}%. Lower reliability makes negative events more likely."
@@ -488,7 +511,8 @@
       "disadvantages": [
         "Forests are viewed at a slightly lower multiplier",
         "No specialty strengths"
-      ]
+      ],
+      "abbr": "LEO"
     },
     "sso": {
       "name": "Sun-synchronous Orbit (SSO)",
@@ -504,7 +528,8 @@
         "Higher launch cost",
         "Weaker for wildfire observation",
         "Not every launcher can reach it"
-      ]
+      ],
+      "abbr": "SSO"
     },
     "equatorial": {
       "name": "Equatorial Orbit",
@@ -519,7 +544,8 @@
         "Longest eclipses and highest battery need",
         "Weak for air quality",
         "No polar coverage"
-      ]
+      ],
+      "abbr": "EQ"
     }
   },
   "payload": {
@@ -641,5 +667,20 @@
       "name": "Ground network upgrade",
       "description": "More ground stations temporarily raise downlink capacity."
     }
+  },
+  "status": {
+    "ok": "Within limit",
+    "near": "Near limit",
+    "over": "Over limit",
+    "reached": "Target reached",
+    "below": "Below target",
+    "enough": "Enough",
+    "short": "Too low",
+    "deficit": "Deficit",
+    "thin": "Thin margin",
+    "covered": "Covered",
+    "partial": "Not fully covered",
+    "overflowRisk": "Overflow risk",
+    "lowReliability": "Low reliability"
   }
 }
