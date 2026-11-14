@@ -322,7 +322,7 @@ img, svg { display: block; max-width: 100%; }
 .dialog__title { font-family: var(--font-display); text-transform: uppercase; letter-spacing: 0.04em; font-size: 20px; color: var(--primary); }
 .dialog__body { padding: 16px 18px 18px; display: grid; gap: 12px; overflow: auto; max-height: calc(100vh - 140px); }
 .dialog__note { color: var(--muted); font-size: 12.5px; }
-.dialog__actions { display: flex; gap: 10px; justify-content: flex-end; }
+.dialog__actions { display: flex; gap: 10px; justify-content: space-between; }
 .glossary { display: grid; grid-template-columns: 1fr; gap: 4px; }
 .glossary dt { font-weight: 700; color: var(--primary); margin-top: 8px; }
 .glossary dd { color: var(--text); }
