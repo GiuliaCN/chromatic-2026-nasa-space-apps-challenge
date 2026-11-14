@@ -3,7 +3,7 @@ import { createChoiceCard } from '../components/choice-card.js';
 import { createMetric } from '../components/metric.js';
 import { createSpacecraftSvg } from '../components/spacecraft-svg.js';
 import { createIcon } from '../icons.js';
-import { gbMonth, kg, num1, money, pts, watts } from '../format.js';
+import { gbMonth, kg, money, moneyInt, pts, watts } from '../format.js';
 import { limitStatus, maxOf, targetStatus } from '../status.js';
 
 export function mountPayloadDesign(ctx) {
@@ -56,14 +56,14 @@ export function mountPayloadDesign(ctx) {
   });
 
   const slotsEl = h('ul', { class: 'slots', 'aria-label': t('screen.payload.selected', { count: 0, total: data.payloads.length }) });
-  const slotsTitle = h('h4', { class: 'panel__heading' });
+  const slotsTitle = h('h2', { class: 'panel__heading' });
   const totalEl = h('p', { class: 'slots__total' });
 
   const el = h(
     'section',
     { class: 'screen screen--payload' },
     h('article', { class: 'panel' },
-      h('h3', { class: 'panel__title', text: t('screen.payload.summary') }),
+      h('h2', { class: 'panel__title', text: t('screen.payload.summary') }),
       h('p', { class: 'panel__sub', text: t('screen.payload.summaryHint') }),
       Object.values(metrics).map((m) => m.el)),
     h('article', { class: 'panel panel--stage' },
@@ -73,10 +73,10 @@ export function mountPayloadDesign(ctx) {
       slotsEl,
       totalEl),
     h('article', { class: 'panel' },
-      h('h3', { class: 'panel__title', text: t('screen.payload.selection') }),
+      h('h2', { class: 'panel__title', text: t('screen.payload.selection') }),
       h('p', { class: 'panel__sub', text: t('screen.payload.selectionHint') }),
       h('div', { class: 'choice-list choice-list--dense', role: 'group', 'aria-label': t('screen.payload.selection') }, cardEls),
-      h('div', { class: 'why' }, h('h4', { class: 'why__head', text: t('nav.why') }), whyTitle, whyText)),
+      h('div', { class: 'why' }, h('h3', { class: 'why__head', text: t('nav.why') }), whyTitle, whyText)),
   );
 
   return {
@@ -85,7 +85,7 @@ export function mountPayloadDesign(ctx) {
       for (const [id, card] of cards) card.set({ selected: state.payloadIds.includes(id) });
       sc.update(items);
 
-      metrics.cost.set({ value: ind.totalCostM, max: ind.budgetM, text: `${num1(ind.totalCostM)} / ${ind.budgetM} ${t('units.m')}`, ...limitStatus(t, ind.totalCostM, ind.budgetM) });
+      metrics.cost.set({ value: ind.totalCostM, max: ind.budgetM, text: `${money(ind.totalCostM)} / ${moneyInt(ind.budgetM)}`, ...limitStatus(t, ind.totalCostM, ind.budgetM) });
       metrics.mass.set({ value: ind.totalMassKg, max: maxMass, text: `${kg(ind.totalMassKg)} / ${kg(maxMass)}`, ...limitStatus(t, ind.totalMassKg, maxMass) });
       metrics.power.set({ value: ind.totalPowerDemandW, max: maxPower, text: `${watts(ind.totalPowerDemandW)} / ${watts(maxPower)}`, ...limitStatus(t, ind.totalPowerDemandW, maxPower) });
       metrics.data.set({ value: ind.payloadDataGbPerMonth, max: maxData, text: `${gbMonth(ind.payloadDataGbPerMonth)}`, ...limitStatus(t, ind.payloadDataGbPerMonth, maxData) });

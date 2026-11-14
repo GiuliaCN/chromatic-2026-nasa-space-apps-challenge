@@ -4,7 +4,7 @@ import { createMetric } from '../components/metric.js';
 import { createSpacecraftSvg } from '../components/spacecraft-svg.js';
 import { computeIndicators } from '../../core/calculations.js';
 import { createIcon } from '../icons.js';
-import { gb, gbMonth, kg, money, num, percent, signed, watts, wh } from '../format.js';
+import { gb, gbMonth, kg, money, moneyInt, percent, signed, watts, wh } from '../format.js';
 
 const TABS = ['power', 'comm', 'bus'];
 
@@ -106,7 +106,7 @@ export function mountSpacecraftDesign(ctx) {
   const tipEl = h('p', { class: 'tip' });
   const totalsEl = h('p', { class: 'fine' });
   const optionsHost = h('div', { class: 'options-host' });
-  const headingEl = h('h3', { class: 'panel__title' });
+  const headingEl = h('h2', { class: 'panel__title' });
 
   const tabButtons = TABS.map((key) => {
     const label = { power: 'screen.spacecraft.tabPower', comm: 'screen.spacecraft.tabComm', bus: 'screen.spacecraft.tabBus' }[key];
@@ -128,7 +128,7 @@ export function mountSpacecraftDesign(ctx) {
     'section',
     { class: 'screen screen--spacecraft' },
     h('article', { class: 'panel' },
-      h('h3', { class: 'panel__title', text: t('screen.spacecraft.summaryTitle') }),
+      h('h2', { class: 'panel__title', text: t('screen.spacecraft.summaryTitle') }),
       metricHost, noticeHost, tipEl, totalsEl),
     h('article', { class: 'panel panel--stage' }, h('div', { class: 'stage stage--tall' }, sc.el)),
     h('article', { class: 'panel' },
@@ -178,14 +178,16 @@ export function mountSpacecraftDesign(ctx) {
     } else {
       const bad = ind.supportedLoadKg > (items.bus?.maxSupportedMassKg ?? 0);
       m1.set({ value: ind.supportedLoadKg, max: Math.max(items.bus?.maxSupportedMassKg ?? 0, ind.supportedLoadKg), text: `${kg(ind.supportedLoadKg)} / ${kg(items.bus?.maxSupportedMassKg ?? 0)}`, status: !items.bus ? 'neutral' : bad ? 'bad' : 'ok', statusText: !items.bus ? '' : bad ? t('status.over') : t('status.ok') });
-      m2.set({ value: ind.missionReliability, max: 1, text: percent(ind.missionReliability), status: ind.missionReliability < data.game.lowReliabilityThreshold ? 'warn' : 'ok', statusText: ind.missionReliability < data.game.lowReliabilityThreshold ? t('status.lowReliability') : t('status.ok') });
+      const rel = items.bus?.reliability ?? 0;
+      const lowRel = Boolean(items.bus) && rel < data.game.lowReliabilityThreshold;
+      m2.set({ value: rel, max: 1, text: items.bus ? percent(rel) : '—', status: !items.bus ? 'neutral' : lowRel ? 'warn' : 'ok', statusText: !items.bus ? '' : lowRel ? t('status.lowReliability') : t('status.ok') });
     }
 
     clear(noticeHost);
     for (const item of [...check.blockers, ...check.warnings].filter((i) => i.step === 'spacecraft' && i.tab === tab)) {
       noticeHost.append(h('li', { class: `notice notice--${item.severity}` }, h('b', { text: `${t(item.severity === 'blocker' ? 'screen.review.blocked' : 'screen.review.warning')}: ` }), item.message, ' ', h('em', { text: item.action })));
     }
-    totalsEl.textContent = `${t('screen.payload.mass')}: ${kg(ind.totalMassKg)} · ${t('screen.payload.cost')}: ${money(ind.totalCostM)} · ${num(ind.budgetRemainingM)}$M ${t('screen.review.budgetRemaining').toLowerCase()}`;
+    totalsEl.textContent = `${t('screen.payload.mass')}: ${kg(ind.totalMassKg)} · ${t('screen.payload.cost')}: ${money(ind.totalCostM)} · ${t('screen.review.budgetRemaining')}: ${moneyInt(Math.round(ind.budgetRemainingM * 10) / 10)}`;
   }
 
   return { el, update: render };

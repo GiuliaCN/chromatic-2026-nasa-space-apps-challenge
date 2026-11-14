@@ -43,6 +43,7 @@ export function mountMissionSimulation(ctx) {
   const bufferM = createMetric({ label: t('screen.simulation.dataBuffered'), icon: createIcon('signal') });
   const lostEl = h('p', { class: 'sim__lost' });
   const noteEl = h('p', { class: 'sim__note' });
+  const banner = h('div', { class: 'sim__banner', role: 'status' });
   const instrHost = h('ul', { class: 'instr' });
   const goalHost = h('ul', { class: 'goalbars' });
   const eventsBody = h('tbody');
@@ -59,15 +60,15 @@ export function mountMissionSimulation(ctx) {
   const el = h(
     'section',
     { class: 'screen screen--simulation' },
-    h('div', { class: 'sim__visual' }, h('div', { class: 'sim__earth' }, earth.el), h('div', { class: 'sim__sat' }, sc.el)),
+    h('div', { class: 'sim__visual' }, h('div', { class: 'sim__earth' }, earth.el), h('div', { class: 'sim__sat' }, sc.el), banner),
     h('div', { class: 'sim__panel' },
       h('div', { class: 'sim__timeline panel' }, h('div', null, h('small', { text: t('screen.simulation.timeline') }), monthEl, monthBar), h('div', { class: 'sim__controls' }, playBtn, h('div', { class: 'seg', role: 'group', 'aria-label': t('screen.simulation.speed') }, speedBtns), skipBtn, resultsBtn)),
       h('div', { class: 'sim__tiles' }, powerM.el, dataM.el, scienceM.el, bufferM.el),
       h('div', { class: 'sim__mid' },
-        h('div', { class: 'panel' }, h('h3', { class: 'panel__heading', text: t('screen.simulation.instruments') }), instrHost),
-        h('div', { class: 'panel' }, h('h3', { class: 'panel__heading', text: t('screen.simulation.goals') }), goalHost)),
+        h('div', { class: 'panel' }, h('h2', { class: 'panel__heading', text: t('screen.simulation.instruments') }), instrHost),
+        h('div', { class: 'panel' }, h('h2', { class: 'panel__heading', text: t('screen.simulation.goals') }), goalHost)),
       h('div', { class: 'panel sim__events' },
-        h('h3', { class: 'panel__heading', text: t('screen.simulation.events') }),
+        h('h2', { class: 'panel__heading', text: t('screen.simulation.events') }),
         h('div', { class: 'table-wrap' }, h('table', { class: 'events-table' },
           h('thead', null, h('tr', null, h('th', { text: t('screen.simulation.eventMonth') }), h('th', { text: t('screen.simulation.eventName') }), h('th', { text: t('screen.simulation.eventEffect') }))), eventsBody)),
         emptyEvents, noteEl, lostEl)),
@@ -123,6 +124,18 @@ export function mountMissionSimulation(ctx) {
     for (const e of seen) {
       const def = data.byId.events.get(e.eventId);
       eventsBody.append(h('tr', { 'data-kind': def.kind }, h('td', { text: String(e.startMonth).padStart(2, '0') }), h('td', null, h('b', { text: `${def.kind === 'negative' ? '▼' : '▲'} ` }), t(def.nameKey)), h('td', { text: effectText(def) })));
+    }
+
+    // Flash a banner in the month a new event begins.
+    if (rec && rec.newEventId) {
+      const def = data.byId.events.get(rec.newEventId);
+      banner.replaceChildren(h('b', { text: `${def.kind === 'negative' ? '▼' : '▲'} ${t(def.nameKey)}` }), h('span', { text: t(def.descriptionKey) }));
+      banner.dataset.kind = def.kind;
+      banner.classList.remove('is-on');
+      void banner.offsetWidth; // restart the CSS animation
+      banner.classList.add('is-on');
+    } else if (!rec || !rec.newEventId) {
+      banner.classList.remove('is-on');
     }
 
     // Visual feedback for active events.

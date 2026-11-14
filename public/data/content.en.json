@@ -29,7 +29,8 @@
     "why": "Why does this matter?",
     "close": "Close",
     "skip": "Skip",
-    "edit": "Edit"
+    "edit": "Edit",
+    "skipToContent": "Skip to content"
   },
   "units": {
     "kg": "kg",
@@ -310,7 +311,7 @@
     "eventNegative": "{event} ({months} months in total) cost about {points} pts.",
     "eventPositive": "{event} ({months} months in total) added about {points} pts.",
     "eventNone": "No events occurred, so the result reflects your design alone.",
-    "budget": "You used {used}$M of the {budget}$M budget.",
+    "budget": "You used ${used}M of the ${budget}M budget.",
     "reliabilityRisk": "Mission reliability was {percent}%. Lower reliability makes negative events more likely."
   },
   "validation": {
@@ -343,7 +344,7 @@
       "action": "Open Launch Planning and pick a launcher."
     },
     "budgetExceeded": {
-      "message": "The design costs {over}$M more than the {budget}$M budget.",
+      "message": "The design costs ${over}M more than the ${budget}M budget.",
       "action": "Remove an instrument or pick cheaper systems or a cheaper launcher."
     },
     "launcherTooSmall": {

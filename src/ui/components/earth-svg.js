@@ -13,7 +13,7 @@ const CONTINENTS = [
   'M150 118 C166 112 186 124 184 142 C182 158 168 160 160 152 C150 144 142 126 150 118 Z',
 ];
 
-function globe(id, r, cx, cy, landDy = 0) {
+function globe(id, r, cx, cy, landDy = 0, customLand = null) {
   const g = s('g');
   g.append(
     s('circle', { cx, cy, r: r * 1.08, fill: `url(#${id}-atmo)` }),
@@ -21,15 +21,34 @@ function globe(id, r, cx, cy, landDy = 0) {
   );
   const land = s('g', { 'clip-path': `url(#${id}-clip)` });
   const k = (r * 2) / 240;
-  for (const d of CONTINENTS) {
+  if (customLand) land.append(...customLand);
+  else for (const d of CONTINENTS) {
     land.append(s('path', { d, fill: '#3fa65a', opacity: 0.92, transform: `translate(${cx - r} ${cy - r + landDy}) scale(${k})` }));
     land.append(s('path', { d, fill: 'none', stroke: '#8be08f', 'stroke-opacity': 0.5, 'stroke-width': 1.2, transform: `translate(${cx - r} ${cy - r + landDy}) scale(${k})` }));
   }
-  for (const [x, y, w] of [[70, 60, 30], [150, 100, 34], [100, 170, 28], [170, 150, 22], [60, 130, 20]]) {
+  if (!customLand) for (const [x, y, w] of [[70, 60, 30], [150, 100, 34], [100, 170, 28], [170, 150, 22], [60, 130, 20]]) {
     land.append(s('ellipse', { cx: cx - r + x * k, cy: cy - r + landDy + y * k, rx: w * k, ry: 6 * k, fill: '#ffffff', opacity: 0.55 }));
   }
   g.append(land, s('circle', { cx, cy, r, fill: `url(#${id}-shade)` }));
   return g;
+}
+
+/** Smooth closed blob (quadratic mid-point smoothing) around a centre, flattened vertically. */
+function blobPath(rnd, cx, cy, r, flatten = 0.55, n = 9) {
+  const pts = [];
+  for (let i = 0; i < n; i += 1) {
+    const a = (i / n) * Math.PI * 2;
+    const rr = r * (0.55 + rnd() * 0.65);
+    pts.push([cx + Math.cos(a) * rr, cy + Math.sin(a) * rr * flatten]);
+  }
+  const mid = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+  let d = `M${mid(pts[0], pts[1]).join(" ")}`;
+  for (let i = 1; i <= n; i += 1) {
+    const p = pts[i % n];
+    const m = mid(p, pts[(i + 1) % n]);
+    d += ` Q${p.join(" ")} ${m.join(" ")}`;
+  }
+  return d + " Z";
 }
 
 function defs(id, r, cx, cy) {
@@ -115,6 +134,27 @@ export function createEarthLimbSvg({ label = '', vivid = true } = {}) {
   const cx = 400;
   const cy = 860;
   const r = 560;
+  let seed = 9;
+  const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+
+  // Land masses, clouds and city lights are placed on the visible cap of the globe.
+  const landEls = [];
+  const lightEls = [];
+  const centres = [[120, 470, 70], [250, 420, 58], [360, 455, 40], [470, 400, 52], [590, 440, 74], [700, 395, 56], [180, 380, 34], [520, 480, 46], [640, 360, 30]];
+  for (const [x, y, rad] of centres) {
+    const d = blobPath(rnd, x, y, rad);
+    landEls.push(
+      s('path', { d, fill: '#3b9a56', opacity: 0.95 }),
+      s('path', { d, fill: 'none', stroke: '#8be08f', 'stroke-opacity': 0.45, 'stroke-width': 1.5 }),
+    );
+    for (let i = 0; i < 7; i += 1) {
+      lightEls.push(s('circle', { cx: x + (rnd() - 0.5) * rad * 1.3, cy: y + (rnd() - 0.5) * rad * 0.7, r: 0.7 + rnd() * 1.2, fill: '#ffd36b', opacity: 0.4 + rnd() * 0.5 }));
+    }
+  }
+  for (let i = 0; i < 16; i += 1) {
+    landEls.push(s('ellipse', { cx: 40 + rnd() * 720, cy: 345 + rnd() * 150, rx: 18 + rnd() * 46, ry: 3 + rnd() * 5, fill: '#ffffff', opacity: 0.28 + rnd() * 0.3 }));
+  }
+
   root.append(
     defs(id, r, cx, cy),
     s('defs', null,
@@ -123,15 +163,10 @@ export function createEarthLimbSvg({ label = '', vivid = true } = {}) {
         s('stop', { offset: '0.25', 'stop-color': '#ffb34a', 'stop-opacity': 0.8 }),
         s('stop', { offset: '1', 'stop-color': '#ff7a1a', 'stop-opacity': 0 }))),
     stars(90, 800, 380, 23),
-    globe(id, r, cx, cy, -215),
+    globe(id, r, cx, cy, 0, landEls),
+    s('g', { 'clip-path': `url(#${id}-clip)` }, ...lightEls),
+    s('circle', { cx, cy, r, fill: 'none', stroke: '#7fe3ff', 'stroke-opacity': 0.55, 'stroke-width': 3 }),
+    s('circle', { cx: 700, cy: 330, r: 60, fill: `url(#${id}-sun)`, class: 'earth-sun' }),
   );
-  const lights = s('g', { 'clip-path': `url(#${id}-clip)` });
-  let seed = 5;
-  const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-  for (let i = 0; i < 70; i += 1) {
-    lights.append(s('circle', { cx: 250 + rnd() * 380, cy: 380 + rnd() * 110, r: 0.8 + rnd() * 1.3, fill: '#ffd36b', opacity: 0.35 + rnd() * 0.6 }));
-  }
-  root.append(lights, s('circle', { cx, cy, r, fill: 'none', stroke: '#7fe3ff', 'stroke-opacity': 0.55, 'stroke-width': 3 }),
-    s('circle', { cx: 640, cy: 322, r: 70, fill: `url(#${id}-sun)`, class: 'earth-sun' }));
   return { el: root };
 }

@@ -37,10 +37,10 @@ export function mountMissionReview(ctx) {
     h('article', { class: 'panel panel--stage' }, h('div', { class: 'stage stage--tall' }, sc.el),
       budget.el, forecast.el),
     h('article', { class: 'panel' },
-      h('h3', { class: 'panel__title', text: t('screen.review.yourDesign') }),
+      h('h2', { class: 'panel__title', text: t('screen.review.yourDesign') }),
       summaryHost),
     h('article', { class: 'panel' },
-      h('h3', { class: 'panel__title', text: t('screen.review.checklist') }),
+      h('h2', { class: 'panel__title', text: t('screen.review.checklist') }),
       checkHost, verdict, approve),
   );
 

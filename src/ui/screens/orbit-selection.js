@@ -35,7 +35,7 @@ export function mountOrbitSelection(ctx) {
     detail,
     h('article', { class: 'panel panel--earth' }, legend, earth.el, strip, h('p', { class: 'fine', text: t('screen.orbit.legendNote') })),
     h('article', { class: 'panel' },
-      h('h3', { class: 'panel__heading', id: 'orbit-heading', text: t('screen.orbit.choose') }),
+      h('h2', { class: 'panel__heading', id: 'orbit-heading', text: t('screen.orbit.choose') }),
       h('div', { class: 'choice-list', role: 'radiogroup', 'aria-labelledby': 'orbit-heading' }, cardEls)),
   );
 
@@ -52,25 +52,25 @@ export function mountOrbitSelection(ctx) {
       clear(detail);
       clear(strip);
       if (!orbit) {
-        detail.append(h('h3', { class: 'panel__heading', text: t('screen.orbit.choose') }), h('p', { class: 'muted', text: t('screen.orbit.pickFirst') }));
+        detail.append(h('h2', { class: 'panel__heading', text: t('screen.orbit.choose') }), h('p', { class: 'muted', text: t('screen.orbit.pickFirst') }));
         return;
       }
       detail.append(
-        h('h3', { class: 'panel__title', text: t(orbit.nameKey) }),
+        h('h2', { class: 'panel__title', text: t(orbit.nameKey) }),
         h('p', { text: t(orbit.descriptionKey) }),
-        h('h4', { class: 'panel__heading', text: t('screen.orbit.keyParameters') }),
+        h('h2', { class: 'panel__heading', text: t('screen.orbit.keyParameters') }),
         h('dl', { class: 'orbit-facts' },
           fact(t('screen.orbit.altitude'), `${num(orbit.altitudeKm)} ${t('units.km')}`),
           fact(t('screen.orbit.inclination'), `${orbit.inclinationDeg}°`),
           fact(t('screen.orbit.revisit'), t(orbit.revisitKey)),
           fact(t('screen.orbit.eclipse'), `${orbit.eclipseDurationH.toFixed(1)} ${t('units.hours')}`),
           fact(t('screen.orbit.launchCost'), t('screen.orbit.launchCostValue', { value: orbit.launchCostMultiplier.toFixed(2) }))),
-        h('h4', { class: 'panel__heading', text: t('screen.orbit.observation') }),
+        h('h2', { class: 'panel__heading', text: t('screen.orbit.observation') }),
         h('ul', { class: 'obs-list' }, data.goals.map((g) => h('li', null, h('span', { text: t(g.nameKey) }), h('b', { text: `×${orbit.observationMultiplierByGoal[g.id].toFixed(2)}` })))),
         h('p', { class: 'coverage' }, h('b', { text: `${t('screen.orbit.coverage')}: ` }), t(orbit.coverageKey)),
         h('div', { class: 'pros-cons' },
-          h('div', { class: 'pros' }, h('h4', { text: `＋ ${t('screen.orbit.advantages')}` }), h('ul', null, t.list(orbit.advantagesKey).map((x) => h('li', { text: x })))),
-          h('div', { class: 'cons' }, h('h4', { text: `－ ${t('screen.orbit.disadvantages')}` }), h('ul', null, t.list(orbit.disadvantagesKey).map((x) => h('li', { text: x }))))),
+          h('div', { class: 'pros' }, h('h3', { text: `＋ ${t('screen.orbit.advantages')}` }), h('ul', null, t.list(orbit.advantagesKey).map((x) => h('li', { text: x })))),
+          h('div', { class: 'cons' }, h('h3', { text: `－ ${t('screen.orbit.disadvantages')}` }), h('ul', null, t.list(orbit.disadvantagesKey).map((x) => h('li', { text: x }))))),
       );
       strip.append(
         h('div', null, h('small', { text: t('screen.orbit.altitude') }), h('b', { text: `${num(orbit.altitudeKm)} ${t('units.km')}` })),

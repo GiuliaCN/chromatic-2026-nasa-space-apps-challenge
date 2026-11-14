@@ -131,8 +131,9 @@ export function createApp({ root, data, t, store, storage, notice }) {
   const messageEl = h('p', { class: 'footer__message' });
   const footer = h('footer', { class: 'footer' }, backBtn, messageEl, nextBtn);
 
+  const skipLink = h('a', { class: 'skip-link', href: '#main', text: t('nav.skipToContent') });
   const frame = h('div', { class: 'frame' }, topbar, stepper, screenHost, footer);
-  const appEl = h('div', { class: 'app' }, frame);
+  const appEl = h('div', { class: 'app' }, skipLink, frame);
   clear(root).append(appEl);
 
   const stepEls = data.game.planningSteps.map((step, i) => {

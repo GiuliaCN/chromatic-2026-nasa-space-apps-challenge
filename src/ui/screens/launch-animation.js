@@ -67,6 +67,11 @@ export function mountLaunchAnimation(ctx) {
   rocketOuter.append(rocketInner);
   scene.append(rocketOuter);
 
+  // Spent first stage: falls away at separation (stage 4).
+  const spent = createRocketShape('rocket-small', { flame: false });
+  const spentEl = s('g', { class: 'anim-spent' }, s('g', { transform: `translate(0 ${540 - spent.height})` }, spent.el));
+  scene.append(spentEl);
+
   // Smoke and clouds near the pad.
   const smoke = s('g', { class: 'anim-smoke' });
   smoke.append(cloud(180, 540, 1.1), cloud(330, 548, 1.3), cloud(470, 536, 0.9), cloud(40, 556, 1.0));
