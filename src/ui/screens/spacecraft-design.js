@@ -5,6 +5,8 @@ import { createSpacecraftSvg } from '../components/spacecraft-svg.js';
 import { computeIndicators } from '../../core/calculations.js';
 import { createIcon } from '../icons.js';
 import { gb, gbMonth, kg, money, moneyInt, percent, signed, watts, wh } from '../format.js';
+import { maxOf } from '../status.js';
+
 
 const TABS = ['power', 'comm', 'bus'];
 
@@ -15,6 +17,9 @@ export function mountSpacecraftDesign(ctx) {
   let shownTab = null;
   let lastState = null;
   let lastDerived = null;
+
+
+  const maxMass = maxOf(data.launchers, (l) => l.maxPayloadKg);
 
   const TAB_CONFIG = {
     power: {
@@ -100,6 +105,10 @@ export function mountSpacecraftDesign(ctx) {
       createMetric({ label: t('screen.spacecraft.loadVsCapacity'), icon: createIcon('mass') }),
       createMetric({ label: t('screen.spacecraft.reliability'), icon: createIcon('science') }),
     ],
+    generics: [
+      createMetric({ label: t('screen.payload.mass'), icon: createIcon('mass') }),
+      createMetric({ label: t('screen.payload.cost'), icon: createIcon('cost') }),
+    ]
   };
   const metricHost = h('div', { class: 'metric-host' });
   const noticeHost = h('ul', { class: 'notices', 'aria-live': 'polite' });
@@ -165,7 +174,30 @@ export function mountSpacecraftDesign(ctx) {
 
     // Left panel: only the indicators tied to this tab.
     const [m1, m2] = metricSet[tab];
-    if (metricHost.firstChild !== m1.el) clear(metricHost).append(m1.el, m2.el);
+    const [mass_metric, cost_metric] = metricSet["generics"];
+
+    if (metricHost.firstChild !== m1.el) clear(metricHost).append(m1.el, m2.el, mass_metric.el, cost_metric.el);
+
+    // Generics
+    let mass_status = ind.totalMassKg < maxMass ? "ok" : "bad";
+    let cost_status = ind.totalCostM < ind.budgetM ? "ok" : "bad";
+
+    mass_metric.set({
+      value: ind.totalMassKg,
+      max: maxMass,
+      text: `${kg(ind.totalMassKg)}/${kg(maxMass)}`,
+      status: mass_status,
+      statusText: mass_status == "bad" ? t("status.over") : t("status.ok")
+    });
+
+    cost_metric.set({
+      value: ind.totalCostM,
+      max: ind.budgetM,
+      text: `${money(ind.totalCostM)}/${money(ind.budgetM)}`,
+      status: cost_status,
+      statusText: cost_status == "bad" ? t("status.over") : t("status.ok")
+    });
+
     if (tab === 'power') {
       const bad = ind.powerMarginW < 0;
       const thin = !bad && ind.powerMarginRatio < data.game.lowPowerMarginRatio;
@@ -187,7 +219,6 @@ export function mountSpacecraftDesign(ctx) {
     for (const item of [...check.blockers, ...check.warnings].filter((i) => i.step === 'spacecraft' && i.tab === tab)) {
       noticeHost.append(h('li', { class: `notice notice--${item.severity}` }, h('b', { text: `${t(item.severity === 'blocker' ? 'screen.review.blocked' : 'screen.review.warning')}: ` }), item.message, ' ', h('em', { text: item.action })));
     }
-    totalsEl.textContent = `${t('screen.payload.mass')}: ${kg(ind.totalMassKg)} · ${t('screen.payload.cost')}: ${money(ind.totalCostM)} · ${t('screen.review.budgetRemaining')}: ${moneyInt(Math.round(ind.budgetRemainingM * 10) / 10)}`;
   }
 
   return { el, update: render };
