@@ -1,0 +1,645 @@
+{
+  "app": {
+    "title": "Chromatic",
+    "subtitle": "Space Mission Design",
+    "tagline": "Design · Build · Plan · Launch",
+    "intro": "Design your own Earth-observation mission by making engineering trade-offs under real-world style constraints.",
+    "disclaimer": "All numbers in this game are simplified, fictional teaching values. They are not real aerospace sizing data.",
+    "loading": "Loading mission data…",
+    "errorTitle": "The mission data could not be loaded",
+    "errorBody": "Something is wrong with the game configuration files. Details are listed below. Fix the JSON files and reload the page.",
+    "logoAlt": "Chromatic Space Mission Design mission patch"
+  },
+  "steps": {
+    "briefing": "Briefing",
+    "orbit": "Orbit",
+    "payload": "Payload",
+    "spacecraft": "Systems",
+    "launch": "Launch",
+    "review": "Review",
+    "progress": "Mission progress",
+    "stageOf": "{current} of {total} stages"
+  },
+  "nav": {
+    "back": "Back",
+    "next": "Next",
+    "continue": "Continue",
+    "menu": "Main menu",
+    "glossary": "Glossary",
+    "why": "Why does this matter?",
+    "close": "Close",
+    "skip": "Skip",
+    "edit": "Edit"
+  },
+  "units": {
+    "kg": "kg",
+    "w": "W",
+    "wh": "Wh",
+    "gb": "GB",
+    "gbPerMonth": "GB/month",
+    "m": "$M",
+    "pts": "pts",
+    "months": "months",
+    "hours": "h",
+    "km": "km"
+  },
+  "screen": {
+    "menu": {
+      "newMission": "New Mission",
+      "continueMission": "Continue Mission",
+      "howToPlay": "How to Play",
+      "confirmNewTitle": "Start a new mission?",
+      "confirmNewBody": "You have a saved mission. Starting a new one will erase it.",
+      "confirmNewYes": "Erase and start new",
+      "confirmNewNo": "Keep my mission",
+      "discardedSave": "Your saved mission was made with a different version of the game data, so it was discarded.",
+      "storageUnavailable": "Saving is unavailable in this browser. You can still play, but progress will not persist.",
+      "howTitle": "How to play",
+      "how": [
+        "Pick a scientific priority, then choose an orbit, the instruments, the spacecraft systems and a launch vehicle.",
+        "Watch mass, cost, power, data and science forecasts update with every choice.",
+        "Review the checklist. Blockers must be fixed; warnings are risks you may accept.",
+        "Launch, then watch 24 months of operations. Science only counts when data reaches Earth.",
+        "Read the debrief to learn how your decisions shaped the result, then try a different design."
+      ]
+    },
+    "briefing": {
+      "title": "Mission Briefing",
+      "subtitle": "Understand the problem, then choose what matters most.",
+      "missionName": "Earth Watchers",
+      "missionTagline": "Monitor environmental change across Earth over a 24-month operation.",
+      "objectives": "Objectives",
+      "conditions": "Conditions",
+      "budget": "Budget",
+      "duration": "Duration",
+      "minScience": "Min. science score",
+      "choosePriority": "Choose your scientific priority:",
+      "weights": "Weights",
+      "weightLine": "{goal} ×{weight}",
+      "priorityNote": "The priority goal multiplies its science. Your target is measured on the weighted total.",
+      "accept": "Accept Mission",
+      "pickFirst": "Choose a scientific priority to continue.",
+      "footer": "Your priority shapes which instruments and orbits make sense for the whole design."
+    },
+    "orbit": {
+      "title": "Orbit Selection",
+      "subtitle": "Choose the best orbit profile for your mission goals.",
+      "choose": "Choose an orbit profile",
+      "keyParameters": "Key parameters",
+      "altitude": "Altitude",
+      "inclination": "Inclination",
+      "revisit": "Revisit",
+      "eclipse": "Eclipse per orbit",
+      "launchCost": "Launch cost",
+      "launchCostValue": "×{value}",
+      "coverage": "Coverage",
+      "advantages": "Advantages",
+      "disadvantages": "Disadvantages",
+      "observation": "Observation by goal",
+      "legendNote": "Orbit profiles are didactic simplifications; a sun-synchronous orbit is itself a kind of low Earth orbit.",
+      "footer": "Your orbit choice changes science per goal, launch cost, battery needs and which launchers can fly."
+    },
+    "payload": {
+      "title": "Payload Design",
+      "subtitle": "Choose the instruments that will do your science.",
+      "summary": "Design summary",
+      "summaryHint": "Key indicators for the payload",
+      "selection": "Instrument selection",
+      "selectionHint": "Select or remove instruments.",
+      "configuration": "Payload configuration",
+      "selected": "Selected payload ({count}/{total})",
+      "mass": "Mass",
+      "power": "Power draw",
+      "cost": "Cost",
+      "data": "Data produced",
+      "science": "Science forecast",
+      "scienceHint": "Potential, weighted by your priority and orbit",
+      "target": "Target {target} pts",
+      "instrument": "Instrument",
+      "baseScience": "Science (base)",
+      "perGoal": "By goal",
+      "none": "No instrument selected yet. Pick at least one.",
+      "footer": "More instruments mean more science, but also more mass, power, data and cost."
+    },
+    "spacecraft": {
+      "title": "Spacecraft Design",
+      "subtitle": "Support your instruments with power, communications and a structure.",
+      "tabPower": "Power",
+      "tabComm": "Communications",
+      "tabBus": "Spacecraft Bus",
+      "powerTitle": "Power systems",
+      "commTitle": "Communications",
+      "busTitle": "Spacecraft bus",
+      "generation": "Generation",
+      "battery": "Battery",
+      "downlink": "Downlink",
+      "storage": "Storage",
+      "capacity": "Supported load",
+      "reliability": "Reliability",
+      "mass": "Mass",
+      "cost": "Cost",
+      "power": "Power draw",
+      "demand": "Power demand",
+      "margin": "Power margin",
+      "batteryCoverage": "Battery covers eclipse",
+      "dataProduced": "Data produced",
+      "downlinkMargin": "Downlink margin",
+      "bufferRisk": "Storage",
+      "loadVsCapacity": "Load vs. bus capacity",
+      "tipPower": "Generation must cover demand. Battery only bridges eclipses; it never fixes a generation deficit.",
+      "tipComm": "Downlink should be at least the data your instruments produce, or the buffer fills and data is lost.",
+      "tipBus": "The bus must support payload + power + comms mass. Storage is a buffer, not a transmission speed.",
+      "footer": "Every subsystem must be balanced for the mission to succeed."
+    },
+    "launch": {
+      "title": "Launch Planning",
+      "subtitle": "Pick a launch vehicle that fits your mass, orbit and budget.",
+      "capacity": "Capacity",
+      "cost": "Cost",
+      "costNote": "Includes the ×{value} orbit launch factor",
+      "reliability": "Reliability",
+      "orbits": "Supported orbits",
+      "massVsCapacity": "Total mass vs. capacity",
+      "compatible": "Compatible with your orbit",
+      "incompatible": "Cannot reach your orbit",
+      "tooHeavy": "Too heavy for this vehicle",
+      "fits": "Mass fits",
+      "footer": "Heavier designs need bigger rockets, which cost more. Not every rocket reaches every orbit."
+    },
+    "review": {
+      "title": "Mission Review",
+      "subtitle": "Check the design before you commit to launch.",
+      "checklist": "Launch checklist",
+      "ok": "OK",
+      "warning": "Warning",
+      "blocked": "Blocked",
+      "yourDesign": "Your design",
+      "budgetRemaining": "Budget remaining",
+      "forecast": "Science forecast",
+      "approve": "Approve and Launch",
+      "approveBlocked": "Fix blockers to launch",
+      "fixHint": "Fix",
+      "allClear": "All hard requirements are met.",
+      "warningsNote": "Warnings do not block launch, but they can hurt the result.",
+      "footer": "Warnings can hurt the result, blockers cannot be launched."
+    },
+    "animation": {
+      "title": "Launch",
+      "subtitle": "Follow the key moments of your launch.",
+      "skip": "Skip",
+      "stage1": "Rocket on the pad",
+      "stage2": "Liftoff",
+      "stage3": "Stage separation",
+      "stage4": "Satellite released",
+      "stage5": "Solar panels deployed",
+      "stage6": "Operations begin",
+      "countdown": "T-{n}",
+      "liftoff": "Liftoff!",
+      "alt": "Animated rocket launching and releasing a satellite above Earth.",
+      "footer": "This is a simplified, symbolic launch sequence."
+    },
+    "simulation": {
+      "title": "Mission Simulation",
+      "subtitle": "Follow your mission in orbit as events unfold.",
+      "timeline": "Mission timeline",
+      "month": "Month {month} / {total}",
+      "play": "Play",
+      "pause": "Pause",
+      "speed": "Speed",
+      "speedUp": "Speed up",
+      "skipToResults": "Skip to Results",
+      "seeResults": "See Results",
+      "power": "Power",
+      "dataTransmitted": "Data transmitted",
+      "dataLost": "Data lost",
+      "dataBuffered": "In buffer",
+      "science": "Science points",
+      "instruments": "Instrument status",
+      "operational": "Operational",
+      "degraded": "Degraded",
+      "offline": "Offline",
+      "goals": "Science by goal",
+      "events": "Mission events",
+      "eventMonth": "Month",
+      "eventName": "Event",
+      "eventEffect": "Consequence",
+      "noEvents": "No events yet. Quiet skies so far.",
+      "effect": {
+        "powerGenerationMultiplier": "Power generation ×{value}",
+        "instrumentAvailabilityMultiplier": "Instrument availability ×{value}",
+        "downlinkMultiplier": "Downlink ×{value}",
+        "scienceOpportunityMultiplier": "Science opportunity ×{value}"
+      },
+      "note": {
+        "nominal": "Operations nominal: all data was transmitted.",
+        "lowPower": "Power was short: instruments ran at {percent}% of the time.",
+        "backlog": "Downlink could not keep up: {gb} GB waits in the buffer.",
+        "overflow": "Storage overflowed: {gb} GB of data and its science were lost.",
+        "eventStart": "New event: {name}.",
+        "batteryLimit": "The battery did not cover the eclipse, reducing observing time."
+      },
+      "footer": "Science only counts in the month the data reaches Earth."
+    },
+    "debrief": {
+      "title": "Mission Debrief",
+      "subtitle": "Learn how your decisions shaped the outcome.",
+      "success": "Mission successful!",
+      "failure": "Target not reached",
+      "successText": "You reached the science target. Other designs could have worked too.",
+      "failureText": "The mission did not reach the science target. The notes below explain why, and what you could change.",
+      "scientificScore": "Scientific score",
+      "weightedNote": "Weighted by your priority",
+      "dataTransmitted": "Data transmitted",
+      "dataLost": "Data lost to overflow",
+      "dataUnsent": "Left unsent at month 24",
+      "budgetUsed": "Budget used",
+      "operatingTime": "Average operating time",
+      "goalsTitle": "Science by objective",
+      "goalLine": "{earned} pts",
+      "eventsTitle": "Events that occurred",
+      "noEvents": "No events occurred during this mission.",
+      "eventImpact": "Estimated impact: {value} pts",
+      "decisions": "Key decisions",
+      "helped": "What helped",
+      "hurt": "What hurt",
+      "info": "Worth knowing",
+      "warningsTitle": "Warnings at launch",
+      "noWarnings": "No warnings were active at launch.",
+      "seed": "Simulation seed: {seed}",
+      "tryAgain": "Try Again",
+      "newMission": "New Mission",
+      "mainMenu": "Main menu",
+      "footer": "There is no single best solution. Compare designs and learn from each launch."
+    }
+  },
+  "insight": {
+    "priority": "Your priority on {goal} added about {points} pts to the final score.",
+    "orbitHelped": "{orbit} observes {goal} at ×{value}, boosting your priority goal.",
+    "orbitHurt": "{orbit} observes {goal} at only ×{value}, holding back your priority goal.",
+    "dataLost": "Storage was too small: {gb} GB of data (about {points} pts of science) was lost to overflow. A larger bus or faster downlink would help.",
+    "dataUnsent": "{gb} GB (about {points} pts of science) was still in the buffer at month 24 and never reached Earth. More downlink capacity would have delivered it.",
+    "dataClean": "Your downlink and storage kept up with the instruments, so no data was lost.",
+    "backlogMonths": "In {months} months the downlink could not clear the buffer, delaying science.",
+    "powerLimited": "In {months} months the instruments ran below full time because of limited power, costing about {points} pts.",
+    "powerClean": "Power generation covered every instrument in every month.",
+    "batteryShort": "The battery covers only {percent}% of the eclipse energy, so observing time was reduced every month.",
+    "batteryOk": "The battery covered each eclipse, so observing time was not reduced.",
+    "eventNegative": "{event} ({months} months) cost about {points} pts.",
+    "eventPositive": "{event} ({months} months) added about {points} pts.",
+    "eventNone": "No events occurred, so the result reflects your design alone.",
+    "budget": "You used {used}$M of the {budget}$M budget.",
+    "reliabilityRisk": "Mission reliability was {percent}%. Lower reliability makes negative events more likely."
+  },
+  "validation": {
+    "missingPriority": {
+      "message": "No scientific priority has been chosen.",
+      "action": "Go to the Briefing and pick a priority."
+    },
+    "missingOrbit": {
+      "message": "No orbit has been chosen.",
+      "action": "Go to Orbit Selection and pick an orbit."
+    },
+    "noPayload": {
+      "message": "No instrument is selected.",
+      "action": "Open Payload Design and select at least one instrument."
+    },
+    "missingBus": {
+      "message": "No spacecraft bus has been chosen.",
+      "action": "Open Systems and pick a bus."
+    },
+    "missingPower": {
+      "message": "No power system has been chosen.",
+      "action": "Open Systems and pick a power package."
+    },
+    "missingComm": {
+      "message": "No communication system has been chosen.",
+      "action": "Open Systems and pick a communication system."
+    },
+    "missingLauncher": {
+      "message": "No launch vehicle has been chosen.",
+      "action": "Open Launch Planning and pick a launcher."
+    },
+    "budgetExceeded": {
+      "message": "The design costs {over}$M more than the {budget}$M budget.",
+      "action": "Remove an instrument or pick cheaper systems or a cheaper launcher."
+    },
+    "launcherTooSmall": {
+      "message": "Total mass {mass} kg exceeds the launcher capacity of {capacity} kg.",
+      "action": "Pick a larger launcher or reduce mass with lighter instruments and systems."
+    },
+    "busOverloaded": {
+      "message": "Payload, power and comms weigh {load} kg, but the bus supports only {capacity} kg.",
+      "action": "Choose a stronger bus or remove heavy equipment."
+    },
+    "powerDeficit": {
+      "message": "Power demand is {demand} W but generation is only {generation} W.",
+      "action": "Pick a power package with more generation or remove power-hungry equipment. Batteries cannot fix this."
+    },
+    "orbitIncompatible": {
+      "message": "{launcher} cannot reach {orbit}.",
+      "action": "Choose a launcher that supports this orbit, or change the orbit."
+    },
+    "lowPowerMargin": {
+      "message": "Power margin is only {percent}%. Any degradation will cut instrument time.",
+      "action": "Add generation in Systems, or remove a power-hungry instrument."
+    },
+    "batteryShort": {
+      "message": "The battery covers only {percent}% of the eclipse energy need.",
+      "action": "Pick a power package with a bigger battery, or an orbit with shorter eclipses."
+    },
+    "downlinkShort": {
+      "message": "Downlink ({downlink} GB/month) is below data production ({data} GB/month).",
+      "action": "Choose a faster communication system or drop a data-heavy instrument."
+    },
+    "overflowRisk": {
+      "message": "Unsent data would grow beyond the {storage} GB of storage and be lost.",
+      "action": "Raise downlink capacity, or pick a bus with more storage."
+    },
+    "scienceBelowTarget": {
+      "message": "Forecast science is {science} pts, below the {target} pts target.",
+      "action": "Add instruments that match your priority, or pick an orbit that observes it better."
+    },
+    "lowReliability": {
+      "message": "Mission reliability is {percent}%, so negative events are more likely.",
+      "action": "Choose a more reliable bus or launcher."
+    }
+  },
+  "help": {
+    "menu": {
+      "title": "About this game",
+      "body": "Chromatic is a short strategy game about systems engineering. You design a mission, launch it and learn from the result. Every number is a simplified teaching value."
+    },
+    "briefing": {
+      "title": "Why does this matter?",
+      "body": "Real missions start from a science question and a budget. Choosing a priority focuses the mission, but it also leaves other goals with less science. There is no single right answer."
+    },
+    "orbit": {
+      "title": "Why does this matter?",
+      "body": "The orbit decides what the satellite can see, how often, and how long it sits in Earth's shadow. It also changes launch cost and which rockets can reach it."
+    },
+    "payload": {
+      "title": "Why does this matter?",
+      "body": "Instruments create the science, but each one adds mass, power draw and data to carry home. Every extra instrument raises the demands on the rest of the spacecraft."
+    },
+    "spacecraft": {
+      "title": "Why does this matter?",
+      "body": "A spacecraft is a system: power feeds instruments, communications send the data home, and the bus holds everything together. A weak link limits the whole mission."
+    },
+    "launch": {
+      "title": "Why does this matter?",
+      "body": "The launcher sets how much mass you can send and to which orbits. Bigger rockets cost more, so a lighter design can free budget for better instruments."
+    },
+    "review": {
+      "title": "Why does this matter?",
+      "body": "Engineers hold design reviews before launch because there is no repair visit later. Blockers are hard limits; warnings are risks that may cost science."
+    },
+    "animation": {
+      "title": "Why does this matter?",
+      "body": "Launch is the moment your plan meets reality. From here on the design is frozen and you can only watch how it performs."
+    },
+    "simulation": {
+      "title": "Why does this matter?",
+      "body": "Operations are where design choices pay off. Science only counts once data reaches Earth, so power, storage and downlink all matter every month."
+    },
+    "debrief": {
+      "title": "Why does this matter?",
+      "body": "Missions are judged by results, and teams learn from them. Compare what helped and what hurt, then try another design."
+    }
+  },
+  "glossary": {
+    "title": "Glossary",
+    "entries": [
+      {
+        "term": "Payload",
+        "definition": "The scientific instruments carried by the satellite."
+      },
+      {
+        "term": "Bus",
+        "definition": "The structure that holds the satellite together and provides its housekeeping systems. It limits the mass it can support and stores data."
+      },
+      {
+        "term": "Downlink",
+        "definition": "The amount of data the satellite can send to Earth each month."
+      },
+      {
+        "term": "Storage buffer",
+        "definition": "Onboard memory that holds data until it can be sent. When it is full, new data is lost."
+      },
+      {
+        "term": "Eclipse",
+        "definition": "The part of each orbit spent in Earth's shadow, when solar panels make no power and the battery must cover demand."
+      },
+      {
+        "term": "Power margin",
+        "definition": "Generation minus demand. A thin margin leaves little room for degradation."
+      },
+      {
+        "term": "Launch mass",
+        "definition": "Total mass the rocket must lift. Each launcher has a maximum."
+      },
+      {
+        "term": "Sun-synchronous orbit",
+        "definition": "A low Earth orbit that passes over the same place at the same local time each day, giving consistent lighting."
+      },
+      {
+        "term": "Revisit time",
+        "definition": "How long it takes the satellite to observe the same area again."
+      },
+      {
+        "term": "Reliability",
+        "definition": "A simplified chance-of-trouble score. Lower reliability makes negative events more likely in this game."
+      }
+    ]
+  },
+  "goal": {
+    "wildfires": {
+      "name": "Monitor wildfires",
+      "priorityName": "Fire Monitoring",
+      "description": "Detect and track wildfires and thermal changes.",
+      "benefit": "Thermal-sensitive instruments earn the most science, and wildfire seasons can add bonus opportunities.",
+      "tradeoff": "Instruments that favor wildfires add less to forests and air quality."
+    },
+    "deforestation": {
+      "name": "Detect deforestation",
+      "priorityName": "Forest Monitoring",
+      "description": "Follow changes in vegetation and forest cover.",
+      "benefit": "Radar, LiDAR and multispectral imaging all contribute strongly to forest science.",
+      "tradeoff": "The strongest forest instruments are heavy, power hungry and produce a lot of data."
+    },
+    "airQuality": {
+      "name": "Analyze atmospheric changes",
+      "priorityName": "Atmospheric Analysis",
+      "description": "Measure atmospheric gases and air quality.",
+      "benefit": "A single spectrometer is cheap and light for the science it delivers.",
+      "tradeoff": "Few instruments see the atmosphere, so you depend on the spectrometer and a good orbit."
+    }
+  },
+  "orbit": {
+    "leo": {
+      "name": "Low Earth Orbit (LEO)",
+      "description": "Close to Earth: a balanced, lower-cost profile.",
+      "coverage": "Good coverage of mid-latitudes with frequent passes.",
+      "revisit": "1–3 days",
+      "advantages": [
+        "Lowest launch cost",
+        "Short eclipses of moderate length",
+        "Balanced observation of every goal"
+      ],
+      "disadvantages": [
+        "Forests are viewed at a slightly lower multiplier",
+        "No specialty strengths"
+      ]
+    },
+    "sso": {
+      "name": "Sun-synchronous Orbit (SSO)",
+      "description": "Passes over the same place at the same local time.",
+      "coverage": "Near-polar coverage with consistent lighting.",
+      "revisit": "1–2 days",
+      "advantages": [
+        "Best forest and air-quality observation",
+        "Shortest eclipses, so less battery is needed",
+        "Consistent lighting"
+      ],
+      "disadvantages": [
+        "Higher launch cost",
+        "Weaker for wildfire observation",
+        "Not every launcher can reach it"
+      ]
+    },
+    "equatorial": {
+      "name": "Equatorial Orbit",
+      "description": "Aligned with Earth's equator.",
+      "coverage": "Frequent passes over the tropics, none over the poles.",
+      "revisit": "Hours over the tropics",
+      "advantages": [
+        "Best for tropical wildfires and forests",
+        "Moderate launch cost"
+      ],
+      "disadvantages": [
+        "Longest eclipses and highest battery need",
+        "Weak for air quality",
+        "No polar coverage"
+      ]
+    }
+  },
+  "payload": {
+    "multispectralCamera": {
+      "name": "Multispectral Camera",
+      "description": "Captures data in several wavelengths, helping monitor vegetation, water and land-use change."
+    },
+    "thermalSensor": {
+      "name": "Thermal Sensor",
+      "description": "Sees heat, making it the best tool for spotting and tracking wildfires."
+    },
+    "atmosphericSpectrometer": {
+      "name": "Atmospheric Spectrometer",
+      "description": "Measures gases in the air. Light, cheap and the key to air-quality science."
+    },
+    "sar": {
+      "name": "Synthetic Aperture Radar",
+      "description": "Sees through clouds and darkness. Powerful for forests, but heavy, hungry and data-heavy."
+    },
+    "lidar": {
+      "name": "LiDAR",
+      "description": "Laser ranging that measures canopy height. Compact and useful for forest structure."
+    }
+  },
+  "bus": {
+    "light": {
+      "name": "Light Bus",
+      "description": "Cheap and light, but supports little mass and stores little data."
+    },
+    "standard": {
+      "name": "Standard Bus",
+      "description": "A balanced structure for mid-size missions."
+    },
+    "heavy": {
+      "name": "Heavy Bus",
+      "description": "Supports big payloads and stores lots of data, at high cost and mass."
+    }
+  },
+  "power": {
+    "compact": {
+      "name": "Compact Array",
+      "description": "Small panels and battery. Cheap and light, for low-demand designs."
+    },
+    "standard": {
+      "name": "Standard Array",
+      "description": "Balanced panels and battery for most designs."
+    },
+    "large": {
+      "name": "Large Array",
+      "description": "Big panels and battery for power-hungry payloads, at high cost and mass."
+    },
+    "endurance": {
+      "name": "Endurance Pack",
+      "description": "Modest panels with a big battery, good for long eclipses but not for high demand."
+    }
+  },
+  "comm": {
+    "uhf": {
+      "name": "UHF Link",
+      "description": "Low-rate, low-power link. Cheap but easily saturated."
+    },
+    "xband": {
+      "name": "X-band Link",
+      "description": "A solid mid-rate link for most payloads."
+    },
+    "kaband": {
+      "name": "Ka-band Link",
+      "description": "High-rate link for data-heavy instruments, with high power draw and cost."
+    }
+  },
+  "launcher": {
+    "sparrow": {
+      "name": "Sparrow-1",
+      "description": "Small and cheap. Limited capacity and no sun-synchronous reach."
+    },
+    "condor": {
+      "name": "Condor-M",
+      "description": "A versatile medium launcher that reaches every orbit."
+    },
+    "titan": {
+      "name": "Titan-X",
+      "description": "Heavy and most reliable, but expensive."
+    }
+  },
+  "event": {
+    "solarDegradation": {
+      "name": "Solar degradation",
+      "description": "Panels lose efficiency from radiation. Designs with thin power margins suffer most."
+    },
+    "instrumentAnomaly": {
+      "name": "Instrument anomaly",
+      "description": "A fault temporarily reduces instrument availability."
+    },
+    "groundOutage": {
+      "name": "Ground station outage",
+      "description": "A ground station goes offline, halving the downlink. Tight links suffer most."
+    },
+    "solarStorm": {
+      "name": "Solar storm",
+      "description": "Charged particles reduce power generation and disturb communications."
+    },
+    "majorWildfire": {
+      "name": "Major wildfire season",
+      "description": "A thermal sensor gets a great chance to observe unusual fires."
+    },
+    "deforestationSurge": {
+      "name": "Deforestation surge",
+      "description": "Rapid forest change creates extra opportunity for forest monitoring."
+    },
+    "hazeEpisode": {
+      "name": "Haze episode",
+      "description": "A major pollution event gives atmospheric instruments extra opportunity."
+    },
+    "clearSkies": {
+      "name": "Clear skies",
+      "description": "A cloud-free season boosts observation from sun-synchronous orbit."
+    },
+    "networkUpgrade": {
+      "name": "Ground network upgrade",
+      "description": "More ground stations temporarily raise downlink capacity."
+    }
+  }
+}

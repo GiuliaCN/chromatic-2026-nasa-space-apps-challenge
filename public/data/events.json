@@ -1,0 +1,76 @@
+{
+  "events": [
+    {
+      "id": "solar-degradation",
+      "nameKey": "event.solarDegradation.name", "descriptionKey": "event.solarDegradation.description",
+      "kind": "negative", "weight": 3, "durationMonths": 3,
+      "effects": [{ "type": "powerGenerationMultiplier", "value": 0.8 }],
+      "conditions": [{ "type": "powerMarginRatioBelow", "value": 0.3 }],
+      "visualVariant": "panel-dim"
+    },
+    {
+      "id": "instrument-anomaly",
+      "nameKey": "event.instrumentAnomaly.name", "descriptionKey": "event.instrumentAnomaly.description",
+      "kind": "negative", "weight": 2, "durationMonths": 2,
+      "effects": [{ "type": "instrumentAvailabilityMultiplier", "value": 0.6 }],
+      "visualVariant": "instrument-fault"
+    },
+    {
+      "id": "ground-station-outage",
+      "nameKey": "event.groundOutage.name", "descriptionKey": "event.groundOutage.description",
+      "kind": "negative", "weight": 2, "durationMonths": 2,
+      "effects": [{ "type": "downlinkMultiplier", "value": 0.5 }],
+      "conditions": [{ "type": "downlinkMarginRatioBelow", "value": 1.0 }],
+      "visualVariant": "link-lost"
+    },
+    {
+      "id": "solar-storm",
+      "nameKey": "event.solarStorm.name", "descriptionKey": "event.solarStorm.description",
+      "kind": "negative", "weight": 1, "durationMonths": 1,
+      "effects": [
+        { "type": "powerGenerationMultiplier", "value": 0.85 },
+        { "type": "downlinkMultiplier", "value": 0.7 }
+      ],
+      "visualVariant": "storm"
+    },
+    {
+      "id": "major-wildfire",
+      "nameKey": "event.majorWildfire.name", "descriptionKey": "event.majorWildfire.description",
+      "kind": "positive", "weight": 2, "durationMonths": 2,
+      "effects": [{ "type": "scienceOpportunityMultiplier", "value": 1.3 }],
+      "conditions": [{ "type": "hasInstrument", "value": "thermal-sensor" }],
+      "visualVariant": "fire"
+    },
+    {
+      "id": "deforestation-surge",
+      "nameKey": "event.deforestationSurge.name", "descriptionKey": "event.deforestationSurge.description",
+      "kind": "positive", "weight": 2, "durationMonths": 2,
+      "effects": [{ "type": "scienceOpportunityMultiplier", "value": 1.25 }],
+      "conditions": [{ "type": "goalPriorityIs", "value": "deforestation" }],
+      "visualVariant": "forest"
+    },
+    {
+      "id": "haze-episode",
+      "nameKey": "event.hazeEpisode.name", "descriptionKey": "event.hazeEpisode.description",
+      "kind": "positive", "weight": 2, "durationMonths": 2,
+      "effects": [{ "type": "scienceOpportunityMultiplier", "value": 1.25 }],
+      "conditions": [{ "type": "goalPriorityIs", "value": "airQuality" }],
+      "visualVariant": "air"
+    },
+    {
+      "id": "clear-skies",
+      "nameKey": "event.clearSkies.name", "descriptionKey": "event.clearSkies.description",
+      "kind": "positive", "weight": 1, "durationMonths": 2,
+      "effects": [{ "type": "scienceOpportunityMultiplier", "value": 1.2 }],
+      "conditions": [{ "type": "orbitIs", "value": "sun-synchronous" }],
+      "visualVariant": "clear"
+    },
+    {
+      "id": "network-upgrade",
+      "nameKey": "event.networkUpgrade.name", "descriptionKey": "event.networkUpgrade.description",
+      "kind": "positive", "weight": 2, "durationMonths": 3,
+      "effects": [{ "type": "downlinkMultiplier", "value": 1.25 }],
+      "visualVariant": "link-boost"
+    }
+  ]
+}

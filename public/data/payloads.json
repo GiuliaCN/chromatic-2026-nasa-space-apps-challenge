@@ -1,0 +1,44 @@
+{
+  "payloads": [
+    {
+      "id": "multispectral-camera",
+      "nameKey": "payload.multispectralCamera.name",
+      "descriptionKey": "payload.multispectralCamera.description",
+      "costM": 38, "massKg": 120, "powerW": 70, "dataGbPerMonth": 150,
+      "scienceByGoal": { "wildfires": 8, "deforestation": 10, "airQuality": 2 },
+      "visualSlot": "front-camera"
+    },
+    {
+      "id": "thermal-sensor",
+      "nameKey": "payload.thermalSensor.name",
+      "descriptionKey": "payload.thermalSensor.description",
+      "costM": 22, "massKg": 95, "powerW": 60, "dataGbPerMonth": 120,
+      "scienceByGoal": { "wildfires": 11, "deforestation": 2, "airQuality": 2 },
+      "visualSlot": "front-sensor"
+    },
+    {
+      "id": "atmospheric-spectrometer",
+      "nameKey": "payload.atmosphericSpectrometer.name",
+      "descriptionKey": "payload.atmosphericSpectrometer.description",
+      "costM": 34, "massKg": 80, "powerW": 55, "dataGbPerMonth": 60,
+      "scienceByGoal": { "wildfires": 3, "deforestation": 0, "airQuality": 12 },
+      "visualSlot": "side-spectrometer"
+    },
+    {
+      "id": "synthetic-aperture-radar",
+      "nameKey": "payload.sar.name",
+      "descriptionKey": "payload.sar.description",
+      "costM": 62, "massKg": 180, "powerW": 140, "dataGbPerMonth": 250,
+      "scienceByGoal": { "wildfires": 6, "deforestation": 15, "airQuality": 4 },
+      "visualSlot": "bottom-radar"
+    },
+    {
+      "id": "lidar",
+      "nameKey": "payload.lidar.name",
+      "descriptionKey": "payload.lidar.description",
+      "costM": 24, "massKg": 70, "powerW": 45, "dataGbPerMonth": 90,
+      "scienceByGoal": { "wildfires": 1, "deforestation": 7, "airQuality": 2 },
+      "visualSlot": "rear-lidar"
+    }
+  ]
+}

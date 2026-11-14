@@ -1,0 +1,34 @@
+{
+  "goals": [
+    {
+      "id": "wildfires",
+      "nameKey": "goal.wildfires.name",
+      "descriptionKey": "goal.wildfires.description",
+      "priorityNameKey": "goal.wildfires.priorityName",
+      "benefitKey": "goal.wildfires.benefit",
+      "tradeoffKey": "goal.wildfires.tradeoff",
+      "priorityMultiplier": 1.5,
+      "visualVariant": "fire"
+    },
+    {
+      "id": "deforestation",
+      "nameKey": "goal.deforestation.name",
+      "descriptionKey": "goal.deforestation.description",
+      "priorityNameKey": "goal.deforestation.priorityName",
+      "benefitKey": "goal.deforestation.benefit",
+      "tradeoffKey": "goal.deforestation.tradeoff",
+      "priorityMultiplier": 1.5,
+      "visualVariant": "forest"
+    },
+    {
+      "id": "airQuality",
+      "nameKey": "goal.airQuality.name",
+      "descriptionKey": "goal.airQuality.description",
+      "priorityNameKey": "goal.airQuality.priorityName",
+      "benefitKey": "goal.airQuality.benefit",
+      "tradeoffKey": "goal.airQuality.tradeoff",
+      "priorityMultiplier": 1.5,
+      "visualVariant": "air"
+    }
+  ]
+}

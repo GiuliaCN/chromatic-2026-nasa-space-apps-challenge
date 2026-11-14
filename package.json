@@ -1,0 +1,25 @@
+{
+  "name": "chromatic-space-mission-designer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Chromatic: Space Mission Designer - 2026 NASA Space Apps Challenge (static frontend game)",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test \"tests/**/*.test.js\"",
+    "validate:data": "node scripts/validate-data.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GiuliaCN/chromatic-2026-nasa-space-apps-challenge.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^8.3.8"
+  }
+}
