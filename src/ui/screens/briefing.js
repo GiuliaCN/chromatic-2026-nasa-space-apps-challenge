@@ -27,7 +27,6 @@ export function mountBriefing(ctx) {
   });
 
   const weightsLine = h('p', { class: 'briefing__weights', 'aria-live': 'polite' });
-  const acceptBtn = h('button', { type: 'button', class: 'btn btn--primary btn--wide', onClick: act.next }, h('span', { 'aria-hidden': 'true', text: '✓ ' }), t('screen.briefing.accept'));
 
   const el = h(
     'section',
@@ -58,7 +57,6 @@ export function mountBriefing(ctx) {
       h('div', { class: 'choice-list', role: 'radiogroup', 'aria-labelledby': 'priority-heading' }, cardEls),
       weightsLine,
       h('p', { class: 'fine', text: t('screen.briefing.priorityNote') }),
-      acceptBtn,
     ),
   );
 
@@ -70,8 +68,6 @@ export function mountBriefing(ctx) {
         .map((goal) => t('screen.briefing.weightLine', { goal: t(goal.nameKey), weight: (goal.id === state.goalPriorityId ? goal.priorityMultiplier : 1).toFixed(1) }))
         .join(' · ');
       weightsLine.textContent = `${t('screen.briefing.weights')}: ${line}`;
-      acceptBtn.disabled = !state.goalPriorityId;
-      acceptBtn.title = state.goalPriorityId ? '' : t('screen.briefing.pickFirst');
     },
   };
 }
