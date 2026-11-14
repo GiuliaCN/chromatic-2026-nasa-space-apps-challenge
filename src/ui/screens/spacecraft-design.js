@@ -31,7 +31,7 @@ export function mountSpacecraftDesign(ctx) {
         { label: t('screen.spacecraft.cost'), value: money(o.costM) },
         { label: t('screen.spacecraft.margin'), value: '—' },
       ],
-      preview: (ind) => signed(ind.powerMarginW, ' W'),
+      preview: (ind) => signed(ind.powerMarginW, ` ${t('units.w')}`),
     },
     comm: {
       title: 'screen.spacecraft.commTitle',
@@ -47,7 +47,7 @@ export function mountSpacecraftDesign(ctx) {
         { label: t('screen.spacecraft.cost'), value: money(o.costM) },
         { label: t('screen.spacecraft.downlinkMargin'), value: '—' },
       ],
-      preview: (ind) => signed(ind.downlinkMarginGbPerMonth, ' GB/mo'),
+      preview: (ind) => `${signed(ind.downlinkMarginGbPerMonth)} ${t('units.gbPerMonth')}`,
     },
     bus: {
       title: 'screen.spacecraft.busTitle',

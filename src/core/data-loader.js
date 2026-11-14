@@ -64,7 +64,13 @@ export async function loadRawData(fetchImpl = fetch, urlOf = dataUrl) {
     Object.entries(DATA_FILES).map(async ([key, file]) => {
       let response;
       try {
-        response = await fetchImpl(urlOf(file), { cache: 'no-cache' });
+        // Revalidate so a new deploy is picked up; if the network is down, fall back to whatever
+        // the browser already has cached (lets a previously loaded game start offline).
+        try {
+          response = await fetchImpl(urlOf(file), { cache: 'no-cache' });
+        } catch {
+          response = await fetchImpl(urlOf(file), { cache: 'force-cache' });
+        }
       } catch (err) {
         throw new Error(`Could not download ${file} (${err.message}).`);
       }

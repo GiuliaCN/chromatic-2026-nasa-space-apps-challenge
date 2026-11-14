@@ -252,7 +252,7 @@ export function createSpacecraftSvg({ t, vivid = false }) {
     }
 
     const names = [bus, power, comm, ...payloads].filter(Boolean).map((i) => t(i.nameKey));
-    root.setAttribute('aria-label', names.length ? `Satellite: ${names.join(', ')}` : 'Satellite frame');
+    root.setAttribute('aria-label', names.length ? t('app.satelliteAlt', { parts: names.join(', ') }) : t('app.satelliteFrameAlt'));
   }
 
   /** Event feedback: { panelDim, instrumentFault, linkLost, boosted } (booleans). */

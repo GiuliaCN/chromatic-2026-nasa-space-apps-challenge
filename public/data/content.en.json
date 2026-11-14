@@ -8,7 +8,9 @@
     "loading": "Loading mission data…",
     "errorTitle": "The mission data could not be loaded",
     "errorBody": "Something is wrong with the game configuration files. Details are listed below. Fix the JSON files and reload the page.",
-    "logoAlt": "Chromatic Space Mission Design mission patch"
+    "logoAlt": "Chromatic Space Mission Design mission patch",
+    "satelliteAlt": "Satellite with: {parts}",
+    "satelliteFrameAlt": "Satellite frame with no parts chosen yet"
   },
   "steps": {
     "briefing": "Briefing",
