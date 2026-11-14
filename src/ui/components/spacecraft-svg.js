@@ -20,7 +20,7 @@ const PANEL_VARIANTS = {
 };
 
 const ANTENNAS = ['antenna-small', 'antenna-dish', 'antenna-large'];
-const INSTRUMENT_SLOTS = ['front-camera', 'front-sensor', 'side-spectrometer', 'bottom-radar', 'rear-lidar'];
+const INSTRUMENT_SLOTS = ['bottom-radar', 'front-camera', 'front-sensor', 'side-spectrometer', 'rear-lidar'];
 
 let uid = 0;
 
