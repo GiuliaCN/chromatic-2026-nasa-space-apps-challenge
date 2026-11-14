@@ -5,7 +5,7 @@ import { createSpacecraftSvg } from '../components/spacecraft-svg.js';
 import { computeIndicators } from '../../core/calculations.js';
 import { createIcon } from '../icons.js';
 import { gb, gbMonth, kg, money, moneyInt, percent, signed, watts, wh } from '../format.js';
-import { maxOf } from '../status.js';
+import { limitStatus, maxOf } from '../status.js';
 
 
 const TABS = ['power', 'comm', 'bus'];
@@ -176,26 +176,21 @@ export function mountSpacecraftDesign(ctx) {
     const [m1, m2] = metricSet[tab];
     const [mass_metric, cost_metric] = metricSet["generics"];
 
-    if (metricHost.firstChild !== m1.el) clear(metricHost).append(m1.el, m2.el, mass_metric.el, cost_metric.el);
+    if (metricHost.firstChild !== m1.el) clear(metricHost).append(cost_metric.el, mass_metric.el, m1.el, m2.el);
 
     // Generics
-    let mass_status = ind.totalMassKg < maxMass ? "ok" : "bad";
-    let cost_status = ind.totalCostM < ind.budgetM ? "ok" : "bad";
-
     mass_metric.set({
       value: ind.totalMassKg,
       max: maxMass,
       text: `${kg(ind.totalMassKg)}/${kg(maxMass)}`,
-      status: mass_status,
-      statusText: mass_status == "bad" ? t("status.over") : t("status.ok")
+      ...limitStatus(t, ind.totalMassKg, maxMass)
     });
 
     cost_metric.set({
       value: ind.totalCostM,
       max: ind.budgetM,
       text: `${money(ind.totalCostM)}/${money(ind.budgetM)}`,
-      status: cost_status,
-      statusText: cost_status == "bad" ? t("status.over") : t("status.ok")
+      ...limitStatus(t, ind.totalCostM, ind.budgetM)
     });
 
     if (tab === 'power') {
