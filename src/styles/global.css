@@ -207,14 +207,24 @@ img, svg { display: block; max-width: 100%; }
 .choice-list--dense { gap: 8px; }
 .choice-list--row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .choice-card {
-  appearance: none; cursor: pointer; text-align: left; width: 100%;
-  display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: start;
-  padding: 12px 14px;
+  appearance: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 12px 44px 12px 14px;
   border-radius: 12px;
   border: 1px solid rgba(23, 97, 138, 0.9);
   background: rgba(3, 11, 24, 0.55);
   color: var(--text);
-  transition: border-color var(--t-fast), box-shadow var(--t-fast), background var(--t-fast), transform var(--t-fast);
+  transition: border-color var(--t-fast),
+              box-shadow var(--t-fast),
+              background var(--t-fast),
+              transform var(--t-fast);
 }
 .choice-card:hover { border-color: var(--primary-hover); }
 .choice-card.is-selected { border-color: var(--primary); background: rgba(0, 229, 255, 0.09); box-shadow: var(--glow); }
@@ -233,7 +243,17 @@ img, svg { display: block; max-width: 100%; }
 .choice-card__note[data-tone='warn'] { color: var(--warning); }
 .choice-card__note[data-tone='ok'] { color: var(--success); }
 .choice-card__mark {
-  width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--disabled); display: grid; place-items: center; margin-top: 2px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  border-radius: 50%;
+  border: 2px solid var(--disabled);
+  display: grid;
+  place-items: center;
+  z-index: 2;
 }
 .choice-card[role='checkbox'] .choice-card__mark { border-radius: 6px; }
 .choice-card.is-selected .choice-card__mark { border-color: var(--primary); background: var(--primary); }
