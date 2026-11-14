@@ -7,7 +7,7 @@
       "priorityNameKey": "goal.wildfires.priorityName",
       "benefitKey": "goal.wildfires.benefit",
       "tradeoffKey": "goal.wildfires.tradeoff",
-      "priorityMultiplier": 1.5,
+      "priorityMultiplier": 1.8,
       "visualVariant": "fire"
     },
     {
@@ -17,7 +17,7 @@
       "priorityNameKey": "goal.deforestation.priorityName",
       "benefitKey": "goal.deforestation.benefit",
       "tradeoffKey": "goal.deforestation.tradeoff",
-      "priorityMultiplier": 1.5,
+      "priorityMultiplier": 2,
       "visualVariant": "forest"
     },
     {
@@ -27,7 +27,7 @@
       "priorityNameKey": "goal.airQuality.priorityName",
       "benefitKey": "goal.airQuality.benefit",
       "tradeoffKey": "goal.airQuality.tradeoff",
-      "priorityMultiplier": 1.5,
+      "priorityMultiplier": 2,
       "visualVariant": "air"
     }
   ]

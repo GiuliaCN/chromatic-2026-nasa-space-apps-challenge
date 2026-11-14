@@ -4,7 +4,7 @@
   "budgetM": 300,
   "durationMonths": 24,
   "targetSciencePoints": 60,
-  "operationsCostM": 25,
+  "operationsCostM": 20,
   "eventChancePerMonth": 0.3,
   "reliabilitySensitivity": 4,
   "batteryAvailabilityFloor": 0.6,
@@ -12,11 +12,29 @@
   "lowPowerMarginRatio": 0.15,
   "lowReliabilityThreshold": 0.9,
   "planningSteps": [
-    { "id": "briefing", "labelKey": "steps.briefing" },
-    { "id": "orbit", "labelKey": "steps.orbit" },
-    { "id": "payload", "labelKey": "steps.payload" },
-    { "id": "spacecraft", "labelKey": "steps.spacecraft" },
-    { "id": "launch", "labelKey": "steps.launch" },
-    { "id": "review", "labelKey": "steps.review" }
+    {
+      "id": "briefing",
+      "labelKey": "steps.briefing"
+    },
+    {
+      "id": "orbit",
+      "labelKey": "steps.orbit"
+    },
+    {
+      "id": "payload",
+      "labelKey": "steps.payload"
+    },
+    {
+      "id": "spacecraft",
+      "labelKey": "steps.spacecraft"
+    },
+    {
+      "id": "launch",
+      "labelKey": "steps.launch"
+    },
+    {
+      "id": "review",
+      "labelKey": "steps.review"
+    }
   ]
 }

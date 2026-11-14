@@ -2,23 +2,49 @@
   "launchers": [
     {
       "id": "sparrow-1",
-      "nameKey": "launcher.sparrow.name", "descriptionKey": "launcher.sparrow.description",
-      "costM": 40, "massKg": 0, "powerW": 0,
-      "maxPayloadKg": 500, "supportedOrbitIds": ["leo", "equatorial"], "reliability": 0.9,
+      "nameKey": "launcher.sparrow.name",
+      "descriptionKey": "launcher.sparrow.description",
+      "costM": 32,
+      "massKg": 0,
+      "powerW": 0,
+      "maxPayloadKg": 500,
+      "supportedOrbitIds": [
+        "leo",
+        "equatorial"
+      ],
+      "reliability": 0.9,
       "visualSlot": "rocket-small"
     },
     {
       "id": "condor-m",
-      "nameKey": "launcher.condor.name", "descriptionKey": "launcher.condor.description",
-      "costM": 62, "massKg": 0, "powerW": 0,
-      "maxPayloadKg": 800, "supportedOrbitIds": ["leo", "sun-synchronous", "equatorial"], "reliability": 0.94,
+      "nameKey": "launcher.condor.name",
+      "descriptionKey": "launcher.condor.description",
+      "costM": 50,
+      "massKg": 0,
+      "powerW": 0,
+      "maxPayloadKg": 800,
+      "supportedOrbitIds": [
+        "leo",
+        "sun-synchronous",
+        "equatorial"
+      ],
+      "reliability": 0.94,
       "visualSlot": "rocket-medium"
     },
     {
       "id": "titan-x",
-      "nameKey": "launcher.titan.name", "descriptionKey": "launcher.titan.description",
-      "costM": 90, "massKg": 0, "powerW": 0,
-      "maxPayloadKg": 1100, "supportedOrbitIds": ["leo", "sun-synchronous", "equatorial"], "reliability": 0.97,
+      "nameKey": "launcher.titan.name",
+      "descriptionKey": "launcher.titan.description",
+      "costM": 72,
+      "massKg": 0,
+      "powerW": 0,
+      "maxPayloadKg": 1100,
+      "supportedOrbitIds": [
+        "leo",
+        "sun-synchronous",
+        "equatorial"
+      ],
+      "reliability": 0.97,
       "visualSlot": "rocket-heavy"
     }
   ]

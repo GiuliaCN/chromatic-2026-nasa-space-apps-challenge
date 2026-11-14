@@ -1,0 +1,72 @@
+{
+  "_comment": "Test-only fixtures. Not shown in the game. See tests/balance.test.js.",
+  "referenceConfigs": [
+    {
+      "id": "fire-balanced",
+      "label": "Fire watch: balanced four-instrument design over the tropics",
+      "selection": {
+        "goalPriorityId": "wildfires",
+        "orbitId": "equatorial",
+        "payloadIds": ["multispectral-camera", "thermal-sensor", "atmospheric-spectrometer", "lidar"],
+        "busId": "standard-bus",
+        "powerId": "standard-array",
+        "communicationId": "x-band",
+        "launcherId": "condor-m"
+      }
+    },
+    {
+      "id": "forest-lean-radar",
+      "label": "Forest radar: cheapest and lightest, thin reliability and no spare downlink",
+      "selection": {
+        "goalPriorityId": "deforestation",
+        "orbitId": "sun-synchronous",
+        "payloadIds": ["multispectral-camera", "synthetic-aperture-radar"],
+        "busId": "light-bus",
+        "powerId": "compact-array",
+        "communicationId": "x-band",
+        "launcherId": "condor-m"
+      }
+    },
+    {
+      "id": "air-premium",
+      "label": "Air observatory: heavy, expensive and generous margins",
+      "selection": {
+        "goalPriorityId": "airQuality",
+        "orbitId": "sun-synchronous",
+        "payloadIds": ["multispectral-camera", "thermal-sensor", "atmospheric-spectrometer", "lidar"],
+        "busId": "heavy-bus",
+        "powerId": "standard-array",
+        "communicationId": "ka-band",
+        "launcherId": "condor-m"
+      }
+    }
+  ],
+  "failingExamples": [
+    {
+      "id": "slow-link",
+      "label": "Valid design whose UHF downlink is far below the data its instruments produce",
+      "selection": {
+        "goalPriorityId": "wildfires",
+        "orbitId": "equatorial",
+        "payloadIds": ["multispectral-camera", "thermal-sensor", "atmospheric-spectrometer", "lidar"],
+        "busId": "standard-bus",
+        "powerId": "standard-array",
+        "communicationId": "uhf-link",
+        "launcherId": "condor-m"
+      }
+    },
+    {
+      "id": "single-camera",
+      "label": "Valid but under-instrumented: one camera cannot reach the target",
+      "selection": {
+        "goalPriorityId": "deforestation",
+        "orbitId": "leo",
+        "payloadIds": ["multispectral-camera"],
+        "busId": "light-bus",
+        "powerId": "compact-array",
+        "communicationId": "x-band",
+        "launcherId": "sparrow-1"
+      }
+    }
+  ]
+}
