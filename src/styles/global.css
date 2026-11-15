@@ -158,6 +158,9 @@ img, svg { display: block; max-width: 100%; }
 .btn:disabled { cursor: not-allowed; opacity: 0.45; border-color: var(--disabled); }
 .btn--primary { border-color: var(--primary); background: linear-gradient(180deg, rgba(0, 229, 255, 0.22), rgba(0, 229, 255, 0.08)); box-shadow: var(--glow); color: var(--text); }
 .btn--ghost { background: transparent; border-color: rgba(23, 97, 138, 0.8); padding: 6px 12px; font-size: 13px; }
+.btn--transparent {
+  background: transparent;
+}
 .btn--danger { border-color: var(--danger); background: var(--danger-bg); }
 .btn--nav { text-transform: uppercase; min-width: 140px; padding: 12px 20px; letter-spacing: 0.06em; }
 .btn--wide { width: 100%; padding: 12px; text-transform: uppercase; letter-spacing: 0.06em; }

@@ -78,7 +78,7 @@ export function mountMissionDebrief(ctx) {
       h('div', { class: 'debrief__actions' },
         h('button', { type: 'button', class: 'btn btn--primary', onClick: act.tryAgain, text: t('screen.debrief.tryAgain') }),
         h('button', { type: 'button', class: 'btn', onClick: act.newMission, text: t('screen.debrief.newMission') }),
-        h('button', { type: 'button', class: 'btn btn--ghost', onClick: act.toMenu, text: t('screen.debrief.mainMenu') }),
+        h('button', { type: 'button', class: 'btn btn--transparent', onClick: act.toMenu, text: t('screen.debrief.mainMenu') }),
         h('small', { class: 'seed', text: t('screen.debrief.seed', { seed: report.seed }) }))),
   );
   void num;
