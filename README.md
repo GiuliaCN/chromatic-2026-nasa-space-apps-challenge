@@ -8,6 +8,8 @@
 - Every scientific instruments **are based on technologies used in real NASA missions**.
 - Numerical parameters, costs, reliability, and science scores **are simplified for gameplay purposes** and do not represent official NASA specifications.
 
+You can play the deployed version [here](https://giuliacn.github.io/chromatic-2026-nasa-space-apps-challenge/).
+
 ## Simplified model and scientific limitations
 
 - Potential science = sum of instrument science × orbit multiplier × priority weight. Science is only credited when data is **transmitted** (buffer, downlink, and overflow).
@@ -15,6 +17,17 @@
 - The orbit is an educational profile. Altitude, inclination, and revisit are illustrative, and SSO is a low orbit case. There is no orbital mechanics, propulsion, fuel, real radiation, or link budget sizing.
 - Events are draws with weights and multiplicative effects. Reliability only changes the probability of negative events.
 - The outcome is deterministic given the design and seed, but it is a teaching model, not a forecast.
+
+## AI Usage Disclosure
+
+Generative AI tools were used to assist with the development of this project.
+
+- Code development: AI assisted in generating the initial MVP and portions of the JavaScript, HTML, and CSS implementation. The team reviewed, tested, corrected, and refined the generated code.
+- Documentation: AI was used to identify inconsistencies in documentation created and revised by the team.
+- UI/UX references: AI-generated mockups were used as visual references during interface development. These reference images are not included in the final application.
+- Team logo: The Chromatic team logo was generated with AI assistance.
+
+The project concept, gameplay mechanics, engineering decisions, and final validation were developed and managed by the Chromatic team.
 
 # Technical Info
 
