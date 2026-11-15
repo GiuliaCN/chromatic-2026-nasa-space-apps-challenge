@@ -142,8 +142,8 @@ export function createAudio({ config, prefs, onChange }) {
 
 /**
  * Click and hover sounds for every button and link, by event delegation, so screens need no
- * audio code for them. When the click already triggered a more specific sound (purchase, advice,
- * countdown...), the plain click is skipped.
+ * audio code for them. When the click already triggered a more specific sound (advice, countdown...),
+ * the plain click is skipped.
  */
 export function attachUiSounds(audio, target = document) {
   let mark = 0;

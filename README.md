@@ -181,14 +181,13 @@ O módulo `src/ui/audio.js` só toca sons: não lê nem altera o estado do jogo,
 | Menu principal | música `menu` | `music/main-menu.mp3` (*Main Menu*) |
 | Planejamento, lançamento, simulação e debrief | música `mission` | `music/game-loop.wav` (*GameLoop2*) |
 | Passar o mouse em botões e links | `hover` | `sfx/button-hover.wav` |
-| Clique em botões e links | `click` | `sfx/button-click.wav` |
-| Adicionar instrumento, escolher energia, comunicação, bus ou lançador | `purchase` (substitui o clique) | `sfx/purchase.mp3` |
+| Clique em botões, links e cards de escolha | `click` | `sfx/button-click.wav` |
 | Abrir *Why does this matter?*, *Glossary* e *How to Play* | `advice` | `sfx/advice-notification.wav` |
 | Animação: contagem regressiva, decolagem e satélite em operação | `countdown`, `liftoff`, `arrive` | `sfx/launch-countdown.mp3`, `sfx/rocket-launch.mp3`, `sfx/arrive.mp3` |
 | Simulação: evento negativo / positivo | `eventNegative` / `eventPositive` | `sfx/unexpected-event.mp3` / `sfx/advice-notification.wav` |
 
 - Botões **Music** e **Sound effects** no menu e na barra superior. A preferência fica em `localStorage` (`chromatic.audio.v1`), separada do save, e por isso não é apagada por *New Mission*.
-- Cliques e hovers são tratados por delegação de eventos. Se a ação do clique já tocou um som mais específico (compra, ajuda, contagem), o clique simples não toca.
+- Cliques e hovers são tratados por delegação de eventos. Se a ação do clique já tocou um som mais específico (ajuda, contagem), o clique simples não toca.
 - O validador exige todos os efeitos usados pela UI, volumes entre 0 e 1, `musicByScreen` cobrindo todas as telas e caminhos relativos dentro de `public/`. URLs externas são rejeitadas.
 - `game-loop.wav` tem ~20 MB (WAV sem compressão, 116 s). Convertê-lo para MP3 (~2 MB) e trocar o `src` em `audio.json` deixa o carregamento bem mais leve.
 
@@ -197,7 +196,7 @@ O módulo `src/ui/audio.js` só toca sons: não lê nem altera o estado do jogo,
 Todos os sons vêm do [Freesound](https://freesound.org). Os créditos também aparecem no jogo, em *Audio credits* no menu principal.
 
 - *Ambient, Pad, Guitar - Dawning*, de Andrewkn: https://freesound.org/s/859582/, licença [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (exige atribuição).
-- Em CC0 1.0: *Making Up (Soft Hip Hop)*, de shortiefoeva2; *Menu Selection Click*, de NenadSimic; *Hint*, de dland; *Purchase Ka-Ching*, de Qvantor; *Race Start Ready Go*, de steel2008; *Rocket Launch*, de gracenew; *Tada Fanfare A*, de plasterbrain; *Notification Sound*, de yfjesse; *Liminal Space Alarm* (trecho), de Johnmode. Os links estão em `audio.json` e nos README de `music/`.
+- Em CC0 1.0: *Making Up (Soft Hip Hop)*, de shortiefoeva2; *Menu Selection Click*, de NenadSimic; *Hint*, de dland; *Race Start Ready Go*, de steel2008; *Rocket Launch*, de gracenew; *Tada Fanfare A*, de plasterbrain; *Notification Sound*, de yfjesse; *Liminal Space Alarm* (trecho), de Johnmode. Os links estão em `audio.json` e nos README de `music/`.
 
 ## Pendências e limitações conhecidas
 
