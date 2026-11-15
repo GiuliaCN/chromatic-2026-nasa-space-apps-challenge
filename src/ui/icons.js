@@ -24,6 +24,7 @@ export function createIcon(name) {
     science: 'M9 3h6 M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3',
     battery: 'M4 8h14v8H4z M18 11h2v2h-2z M8 10v4 M11 10v4',
     signal: 'M5 19a10 10 0 0 1 14 0 M8 16a6 6 0 0 1 8 0 M12 19h.01',
+    info: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z M12 16v-4 M12 8h.01',
   };
   return s('svg', { viewBox: '0 0 24 24', width: 18, height: 18, fill: 'none', stroke: 'currentColor', 'stroke-width': 1.8, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'aria-hidden': 'true' }, s('path', { d: paths[name] ?? paths.data }));
 }

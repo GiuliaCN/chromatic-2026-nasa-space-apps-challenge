@@ -37,7 +37,7 @@ export function mountMissionDebrief(ctx) {
   });
 
   const byKind = (kind) => report.insights.filter((i) => i.kind === kind);
-  const list = (items2, tone) => h('ul', { class: `insights insights--${tone}` }, items2.map((i) => h('li', null, h('span', { 'aria-hidden': 'true', text: tone === 'good' ? '✓ ' : tone === 'bad' ? '✕ ' : 'i ' }), i.text)));
+  const list = (items2, tone) => h('ul', { class: `insights insights--${tone}` }, items2.map((i) => h('li', null, h('span', { 'aria-hidden': 'true', text: tone === 'good' ? '✓ ' : tone === 'bad' ? '✕ ' : '' }), i.text)));
 
   const eventRows = report.events.map((e) => {
     const def = data.byId.events.get(e.eventId);
@@ -74,7 +74,7 @@ export function mountMissionDebrief(ctx) {
         h('div', { class: 'panel' }, h('h3', { class: 'panel__heading', text: t('screen.debrief.decisions') }),
           byKind('helped').length ? h('div', { class: 'insight-box insight-box--good' }, h('h4', { text: t('screen.debrief.helped') }), list(byKind('helped'), 'good')) : null,
           byKind('hurt').length ? h('div', { class: 'insight-box insight-box--bad' }, h('h4', { text: t('screen.debrief.hurt') }), list(byKind('hurt'), 'bad')) : null,
-          byKind('info').length ? h('div', { class: 'insight-box' }, h('h4', { text: t('screen.debrief.info') }), list(byKind('info'), 'info')) : null)),
+          byKind('info').length ? h('div', { class: 'insight-box' }, h('h4', { text: t('screen.debrief.info') }), h('div', {class: "insight-box--flex"}, createIcon('info'), list(byKind('info'), 'info'))) : null)),
       h('div', { class: 'debrief__actions' },
         h('button', { type: 'button', class: 'btn btn--primary', onClick: act.tryAgain, text: t('screen.debrief.tryAgain') }),
         h('button', { type: 'button', class: 'btn', onClick: act.newMission, text: t('screen.debrief.newMission') }),

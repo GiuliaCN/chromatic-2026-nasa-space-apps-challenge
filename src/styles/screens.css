@@ -234,6 +234,10 @@
 .insight-box--good h4 { color: var(--success); }
 .insight-box--bad { background: var(--danger-bg); border-color: rgba(255, 83, 100, 0.55); }
 .insight-box--bad h4 { color: var(--danger); }
+.insight-box--flex { display: flex; }
+.insight-box--flex svg {
+  margin-right: 5px;
+}
 .insights { display: grid; gap: 6px; font-size: 13.5px; }
 .debrief__actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .seed { margin-left: auto; color: var(--muted); font-size: 11.5px; }
