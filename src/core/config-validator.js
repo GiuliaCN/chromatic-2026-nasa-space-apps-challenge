@@ -1,5 +1,5 @@
 import { lookup } from './i18n.js';
-import { CONDITION_TYPES, EFFECT_TYPES, EVENT_KINDS, HELP_SCREENS } from './rules.js';
+import { CONDITION_TYPES, EFFECT_TYPES, EVENT_KINDS, HELP_SCREENS, SCREENS, SOUND_EFFECTS } from './rules.js';
 
 const isObj = (v) => v !== null && typeof v === 'object' && !Array.isArray(v);
 const isNum = (v) => typeof v === 'number' && Number.isFinite(v);
@@ -202,6 +202,38 @@ export function validateConfig(bundle) {
       }
     }
   });
+
+  // ---- audio.json ------------------------------------------------------------------------------
+  // Sound files must live inside public/: the game never loads third-party assets at runtime.
+  const audio = bundle.audio;
+  if (!isObj(audio)) {
+    err('audio.json must be an object.');
+  } else {
+    const checkSound = (sound, label) => {
+      if (!isStr(sound.src)) err(`${label}: "src" must be a non-empty string.`);
+      else if (/^([a-z][a-z0-9+.-]*:|\/)|(^|\/)\.\.(\/|$)/i.test(sound.src)) err(`${label}: "src" must be a relative path inside public/ (got "${sound.src}").`);
+      checkUnit01(sound, label, 'volume');
+    };
+    checkList('audio.json', 'music', audio.music, checkSound);
+    checkList('audio.json', 'effects', audio.effects, checkSound);
+    const idsOf = (list) => (Array.isArray(list) ? list.filter(isObj).map((x) => x.id) : []);
+    const trackIds = idsOf(audio.music);
+    const effectIds = idsOf(audio.effects);
+    for (const id of SOUND_EFFECTS) if (!effectIds.includes(id)) err(`audio.json: effect "${id}" is missing.`);
+    if (!isObj(audio.musicByScreen)) {
+      err('audio.json: "musicByScreen" must be an object keyed by screen id.');
+    } else {
+      for (const screen of SCREENS) {
+        const id = audio.musicByScreen[screen];
+        if (id !== null && !trackIds.includes(id)) err(`audio.json: "musicByScreen.${screen}" must be a music id or null (got "${id}").`);
+      }
+      for (const key of Object.keys(audio.musicByScreen)) if (!SCREENS.includes(key)) err(`audio.json: "musicByScreen" references unknown screen "${key}".`);
+    }
+    if (!isNonNeg(audio.musicFadeMs)) err('audio.json: "musicFadeMs" must be a non-negative number.');
+    if (!Array.isArray(audio.credits) || !audio.credits.every((c) => isObj(c) && ['title', 'author', 'license', 'url'].every((f) => isStr(c[f])))) {
+      err('audio.json: "credits" must be a list of { title, author, license, url }.');
+    }
+  }
 
   // ---- content: per-screen help, steps, glossary ------------------------------------------------
   if (isObj(content)) {

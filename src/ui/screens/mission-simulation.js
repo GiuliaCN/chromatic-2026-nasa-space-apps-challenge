@@ -12,7 +12,7 @@ const SPEEDS = [1, 5, 10];
 const BASE_MS = 1000;
 
 export function mountMissionSimulation(ctx) {
-  const { t, data, act } = ctx;
+  const { t, data, act, audio } = ctx;
   const state0 = ctx.store.getState();
   const result = state0.simulationResult;
   const derived = ctx.derive(state0);
@@ -157,6 +157,9 @@ export function mountMissionSimulation(ctx) {
       month += 1;
       if (month >= D) playing = false;
       render();
+      // Sound once per new event, here rather than in render(), which also runs on Pause/Speed.
+      const newEventId = result.timeline[month - 1].newEventId;
+      if (newEventId) audio.effect(data.byId.events.get(newEventId).kind === 'negative' ? 'eventNegative' : 'eventPositive');
       tick();
     }, BASE_MS / speed);
   }

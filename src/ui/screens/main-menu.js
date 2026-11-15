@@ -1,9 +1,10 @@
 import { h } from '../dom.js';
 import { createSpacecraftSvg } from '../components/spacecraft-svg.js';
 import { createEarthLimbSvg } from '../components/earth-svg.js';
+import { createAudioToggles } from '../components/audio-toggle.js';
 
 export function mountMainMenu(ctx) {
-  const { t, data, act, dialogs } = ctx;
+  const { t, data, act, dialogs, audio } = ctx;
 
   const showcase = createSpacecraftSvg({ t, vivid: true });
   const pick = (list, i) => list[Math.min(i, list.length - 1)];
@@ -19,6 +20,8 @@ export function mountMainMenu(ctx) {
   const continueBtn = h('button', { type: 'button', class: 'btn btn--hero', onClick: act.continueMission }, h('span', { class: 'btn__glyph', 'aria-hidden': 'true', text: '▤' }), t('screen.menu.continueMission'));
   const howBtn = h('button', { type: 'button', class: 'btn btn--hero', onClick: () => dialogs.howTo() }, h('span', { class: 'btn__glyph', 'aria-hidden': 'true', text: '?' }), t('screen.menu.howToPlay'));
   const noticeEl = h('p', { class: 'menu__notice', role: 'status' });
+  const soundToggles = createAudioToggles({ t, audio });
+  const creditsBtn = h('button', { type: 'button', class: 'btn btn--ghost', onClick: () => dialogs.credits(data.audio.credits), text: t('audio.credits') });
 
   const el = h(
     'section',
@@ -37,6 +40,7 @@ export function mountMainMenu(ctx) {
       h('p', { class: 'menu__intro', text: t('app.intro') }),
       noticeEl,
       h('nav', { class: 'menu__buttons', 'aria-label': t('app.title') }, newBtn, continueBtn, howBtn),
+      h('div', { class: 'menu__sound' }, soundToggles.el, creditsBtn),
       h('p', { class: 'menu__disclaimer', text: t('app.disclaimer') }),
     ),
   );
@@ -50,5 +54,6 @@ export function mountMainMenu(ctx) {
       noticeEl.textContent = ctx.notice.message ?? '';
       noticeEl.hidden = !ctx.notice.message;
     },
+    destroy: soundToggles.destroy,
   };
 }

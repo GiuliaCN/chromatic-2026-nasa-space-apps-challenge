@@ -41,6 +41,35 @@ export function hasSave(storage) {
   }
 }
 
+// ---- audio preferences ----------------------------------------------------------------------
+// Kept apart from the mission save: starting a new mission must not reset the player's sound choice.
+
+export const AUDIO_PREFS_KEY = 'chromatic.audio.v1';
+export const DEFAULT_AUDIO_PREFS = Object.freeze({ music: true, effects: true });
+
+/** Never throws; anything unreadable falls back to the defaults (sound on). */
+export function loadAudioPrefs(storage) {
+  try {
+    const saved = JSON.parse(storage.getItem(AUDIO_PREFS_KEY));
+    if (!saved || typeof saved !== 'object') return { ...DEFAULT_AUDIO_PREFS };
+    return {
+      music: typeof saved.music === 'boolean' ? saved.music : DEFAULT_AUDIO_PREFS.music,
+      effects: typeof saved.effects === 'boolean' ? saved.effects : DEFAULT_AUDIO_PREFS.effects,
+    };
+  } catch {
+    return { ...DEFAULT_AUDIO_PREFS };
+  }
+}
+
+export function saveAudioPrefs(storage, prefs) {
+  try {
+    storage.setItem(AUDIO_PREFS_KEY, JSON.stringify({ music: Boolean(prefs.music), effects: Boolean(prefs.effects) }));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 const known = (map, id) => id === null || map.has(id);
 
 /**

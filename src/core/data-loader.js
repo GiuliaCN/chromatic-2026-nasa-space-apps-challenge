@@ -11,6 +11,7 @@ export const DATA_FILES = {
   spacecraft: 'spacecraft.json',
   launchers: 'launchers.json',
   events: 'events.json',
+  audio: 'audio.json',
 };
 
 function indexById(list) {
@@ -39,6 +40,7 @@ export function createBundle(raw) {
     comms: spacecraft.comms ?? [],
     launchers: raw.launchers?.launchers ?? [],
     events: raw.events?.events ?? [],
+    audio: raw.audio ?? {},
   };
   bundle.byId = {
     goals: indexById(bundle.goals),

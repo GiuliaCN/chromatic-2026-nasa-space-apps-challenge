@@ -38,3 +38,16 @@ export const PLANNING_SCREENS = ['briefing', 'orbit', 'payload', 'spacecraft', '
 
 /** Content sections every screen must provide a help text for. */
 export const HELP_SCREENS = SCREENS;
+
+/** Sound effect ids the UI plays. audio.json must define every one of them. */
+export const SOUND_EFFECTS = [
+  'click',
+  'hover',
+  'purchase',
+  'countdown',
+  'liftoff',
+  'arrive',
+  'advice',
+  'eventNegative',
+  'eventPositive',
+];

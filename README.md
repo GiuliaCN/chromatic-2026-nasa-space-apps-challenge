@@ -24,7 +24,9 @@ npm run validate:data  # valida os JSON de public/data/ e imprime os erros
 
 ```text
 public/data/        JSON do jogo (game, content.en, science-goals, orbits, payloads,
-                    spacecraft, launchers, events) + logo.jpeg
+                    spacecraft, launchers, events, audio) + logo.jpeg
+public/audio/       música (music/) e efeitos sonoros (sfx/) servidos pelo jogo
+music/              arquivos de áudio originais, com README/LICENSE de cada som (não vai para o build)
 src/core/           regras puras, sem DOM: calculations, validation, simulation, rng,
                     game-state, storage, data-loader, config-validator, i18n, rules
 src/ui/             shell, navegação, componentes SVG e as 10 telas
@@ -52,7 +54,7 @@ O build usa `base: './'`, então todas as URLs (JS, CSS, logo e JSON) são relat
 - Variável de ambiente `NODE_VERSION=22`.
 - Não é preciso configurar base.
 
-**Offline**: depois que a página carrega, todo o jogo roda sem rede (os JSON ficam em memória). Isso foi verificado desligando a rede no navegador e jogando até o Debrief. Se a rede cair no carregamento, o loader tenta o cache do navegador. Não há PWA nem service worker.
+**Offline**: depois que a página carrega, todo o jogo roda sem rede (os JSON ficam em memória). Isso foi verificado desligando a rede no navegador e jogando até o Debrief. Se a rede cair no carregamento, o loader tenta o cache do navegador. Não há PWA nem service worker. Os arquivos de áudio são baixados sob demanda; sem rede e sem cache, o jogo simplesmente fica em silêncio.
 
 ## Como editar o jogo (JSON)
 
@@ -68,6 +70,7 @@ Edite os arquivos em `public/data/` e rode `npm run validate:data`. O jogo tamb�
 | `launchers.json` | capacidade, órbitas suportadas e confiabilidade |
 | `events.json` | eventos: peso, duração, efeitos e condições |
 | `content.en.json` | todos os textos: UI, itens, ajuda por tela (`help.<tela>`), glossário, mensagens de validação e do relatório |
+| `audio.json` | arquivos e volumes da música e dos efeitos, música de cada tela (`musicByScreen`, `null` = silêncio), duração do fade e créditos |
 
 - Unidades ficam no nome do campo: `massKg`, `powerW`, `costM`, `dataGbPerMonth`, `storageGb`, `batteryWh`, `eclipseDurationH`.
 - Nomes e descrições são referenciados por `nameKey` e `descriptionKey` (chave pontuada em `content.en.json`). `visualSlot` liga o item a uma peça SVG já existente.
@@ -131,7 +134,7 @@ Aplicada a hierarquia do `CLAUDE.md` (restrições técnicas > escopo > design >
 | Save | Guarda só IDs, `schemaVersion`, `dataVersion` e a seed. O resultado da simulação é recalculado ao carregar. Em Continue após refresh no meio da simulação, a reprodução recomeça no mês 1. |
 | Try Again | Descarta resultado e seed e volta à tela **Review**, com todas as escolhas editáveis. |
 | Animação | O "Skip" vira "Continue" com `prefers-reduced-motion`, e o quadro final é mostrado de imediato. |
-| Áudio | Não implementado (explicitamente fora do MVP). |
+| Áudio | O `design-jogo.md` deixava o áudio fora do MVP, mas a equipe pediu a trilha e os efeitos, que foram implementados sem afetar o motor (ver *Áudio* abaixo). Foi usada a faixa **GameLoop2** no lugar de **Gameloop**. |
 
 ## Referências visuais
 
@@ -139,7 +142,7 @@ Implementadas a partir de `design/references/` (aparência e composição), sem 
 
 - `07-launch-planning.png` é **idêntica** a `06-spacecraft-design.png` (mesmo md5), e **não existem** imagens para Launch Planning e Mission Review (faltam os arquivos 03 e 08). Essas duas telas seguem `design-jogo.md` e o mesmo sistema visual.
 - Diferenças intencionais: paleta e componentes seguem os tokens do `design-jogo.md`; a arte (Terra, satélite, foguete) é SVG próprio e mais simples que as ilustrações de referência; as telas sem referência foram inferidas do documento; não foi carregada nenhuma fonte externa, e o título usa uma pilha de fontes do sistema em itálico/maiúsculas.
-- Fonte e logo: `logo.jpeg` é o único asset binário e está no repositório.
+- Fonte e logo: `logo.jpeg` e os arquivos de `public/audio/` são os únicos assets binários e estão no repositório.
 
 ## Roteiro de demonstração (5 minutos)
 
@@ -153,7 +156,7 @@ Implementadas a partir de `design/references/` (aparência e composição), sem 
 
 ## Testes e verificação
 
-`npm test` roda 88 testes: validador de configuração, fórmulas, validação, simulação, estado e save, falhas do loader, cobertura de chaves de texto e calibração.
+`npm test` roda 97 testes: validador de configuração (inclusive `audio.json`), fórmulas, validação, simulação, estado e save, preferências de som, falhas do loader, cobertura de chaves de texto e calibração.
 
 Verificado manualmente no Chrome (1440×900 e 1280×720), sem erros de console:
 
@@ -168,6 +171,33 @@ Verificado manualmente no Chrome (1440×900 e 1280×720), sem erros de console:
 - JSON inválido;
 - build em subcaminho e jogo offline após o carregamento;
 - axe-core (WCAG 2 A/AA e boas práticas): 0 violações em todas as telas e no diálogo.
+
+## Áudio
+
+O módulo `src/ui/audio.js` só toca sons: não lê nem altera o estado do jogo, e qualquer falha (autoplay bloqueado, arquivo ausente, offline) é silenciosa. Os navegadores só liberam o som depois do primeiro clique ou tecla, então a música começa na primeira interação.
+
+| Momento | Som (`audio.json`) | Arquivo |
+|---|---|---|
+| Menu principal | música `menu` | `music/main-menu.mp3` (*Main Menu*) |
+| Planejamento, lançamento, simulação e debrief | música `mission` | `music/game-loop.wav` (*GameLoop2*) |
+| Passar o mouse em botões e links | `hover` | `sfx/button-hover.wav` |
+| Clique em botões e links | `click` | `sfx/button-click.wav` |
+| Adicionar instrumento, escolher energia, comunicação, bus ou lançador | `purchase` (substitui o clique) | `sfx/purchase.mp3` |
+| Abrir *Why does this matter?*, *Glossary* e *How to Play* | `advice` | `sfx/advice-notification.wav` |
+| Animação: contagem regressiva, decolagem e satélite em operação | `countdown`, `liftoff`, `arrive` | `sfx/launch-countdown.mp3`, `sfx/rocket-launch.mp3`, `sfx/arrive.mp3` |
+| Simulação: evento negativo / positivo | `eventNegative` / `eventPositive` | `sfx/unexpected-event.mp3` / `sfx/advice-notification.wav` |
+
+- Botões **Music** e **Sound effects** no menu e na barra superior. A preferência fica em `localStorage` (`chromatic.audio.v1`), separada do save, e por isso não é apagada por *New Mission*.
+- Cliques e hovers são tratados por delegação de eventos. Se a ação do clique já tocou um som mais específico (compra, ajuda, contagem), o clique simples não toca.
+- O validador exige todos os efeitos usados pela UI, volumes entre 0 e 1, `musicByScreen` cobrindo todas as telas e caminhos relativos dentro de `public/`. URLs externas são rejeitadas.
+- `game-loop.wav` tem ~20 MB (WAV sem compressão, 116 s). Convertê-lo para MP3 (~2 MB) e trocar o `src` em `audio.json` deixa o carregamento bem mais leve.
+
+### Créditos de áudio
+
+Todos os sons vêm do [Freesound](https://freesound.org). Os créditos também aparecem no jogo, em *Audio credits* no menu principal.
+
+- *Ambient, Pad, Guitar - Dawning*, de Andrewkn: https://freesound.org/s/859582/, licença [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (exige atribuição).
+- Em CC0 1.0: *Making Up (Soft Hip Hop)*, de shortiefoeva2; *Menu Selection Click*, de NenadSimic; *Hint*, de dland; *Purchase Ka-Ching*, de Qvantor; *Race Start Ready Go*, de steel2008; *Rocket Launch*, de gracenew; *Tada Fanfare A*, de plasterbrain; *Notification Sound*, de yfjesse; *Liminal Space Alarm* (trecho), de Johnmode. Os links estão em `audio.json` e nos README de `music/`.
 
 ## Pendências e limitações conhecidas
 

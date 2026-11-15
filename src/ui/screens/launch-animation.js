@@ -8,6 +8,7 @@ import { createEarthLimbSvg } from '../components/earth-svg.js';
 
 const STAGE_MS = [3200, 2200, 2000, 2000, 2000, 1500]; // ~13 s total
 const CAPTIONS = ['stage1', 'stage2', 'stage3', 'stage4', 'stage5', 'stage6'];
+const STAGE_SOUNDS = { 1: 'countdown', 2: 'liftoff', 6: 'arrive' }; // effect ids from audio.json
 
 function tower() {
   const g = s('g', { class: 'anim-tower' });
@@ -27,7 +28,7 @@ function cloud(x, y, k) {
 }
 
 export function mountLaunchAnimation(ctx) {
-  const { t, act, data } = ctx;
+  const { t, act, data, audio } = ctx;
   const reduced = prefersReducedMotion();
   let timer = null;
   let countdownTimer = null;
@@ -98,6 +99,7 @@ export function mountLaunchAnimation(ctx) {
 
   function setStage(n) {
     scene.dataset.stage = String(n);
+    if (STAGE_SOUNDS[n]) audio.effect(STAGE_SOUNDS[n]);
     sat.setFolded(n < 5);
     caption.textContent = t(`screen.animation.${CAPTIONS[n - 1]}`);
     if (n !== 1) countdown.textContent = n === 2 ? t('screen.animation.liftoff') : '';
@@ -137,6 +139,9 @@ export function mountLaunchAnimation(ctx) {
     destroy() {
       clearTimeout(timer);
       clearInterval(countdownTimer);
+      // Skip cuts the launch noise; the arrival fanfare may finish over the next screen.
+      audio.stop('countdown');
+      audio.stop('liftoff');
     },
   };
 }
