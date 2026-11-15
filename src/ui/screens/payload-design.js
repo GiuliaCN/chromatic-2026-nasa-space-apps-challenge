@@ -34,10 +34,13 @@ export function mountPayloadDesign(ctx) {
 
   const cards = new Map();
   const cardEls = data.payloads.map((p) => {
+    const src = p.referenceId ? data.byId.sources.get(p.referenceId) : null;
+    const reference = src?.url && src.usage_title ? { url: src.url, label: src.usage_title, newTabLabel: t('screen.review.opensNewTab') } : null;
     const base = Object.values(p.scienceByGoal).reduce((a, b) => a + b, 0);
     const card = createChoiceCard({
       title: t(p.nameKey),
       multi: true,
+      reference,
       stats: [
         { label: t('screen.payload.baseScience'), value: `${base} ${t('units.pts')}` },
         { label: t('screen.payload.mass'), value: kg(p.massKg) },
@@ -49,7 +52,7 @@ export function mountPayloadDesign(ctx) {
         act.togglePayload(p.id);
       },
     });
-    card.el.addEventListener('focus', () => setFocus(p.id));
+    card.el.addEventListener('focusin', () => setFocus(p.id));
     card.el.addEventListener('mouseenter', () => setFocus(p.id));
     cards.set(p.id, card);
     return card.el;

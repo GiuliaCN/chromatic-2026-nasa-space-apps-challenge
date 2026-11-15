@@ -13,7 +13,8 @@
         "deforestation": 10,
         "airQuality": 2
       },
-      "visualSlot": "front-camera"
+      "visualSlot": "front-camera",
+      "referenceId": "nasa-landsat9-oli2"
     },
     {
       "id": "thermal-sensor",
@@ -28,7 +29,8 @@
         "deforestation": 2,
         "airQuality": 2
       },
-      "visualSlot": "front-sensor"
+      "visualSlot": "front-sensor",
+      "referenceId": "nasa-landsat9-tirs2"
     },
     {
       "id": "atmospheric-spectrometer",
@@ -43,7 +45,8 @@
         "deforestation": 0,
         "airQuality": 12
       },
-      "visualSlot": "side-spectrometer"
+      "visualSlot": "side-spectrometer",
+      "referenceId": "nasa-tempo"
     },
     {
       "id": "synthetic-aperture-radar",
@@ -58,7 +61,8 @@
         "deforestation": 15,
         "airQuality": 4
       },
-      "visualSlot": "bottom-radar"
+      "visualSlot": "bottom-radar",
+      "referenceId": "nasa-nisar"
     },
     {
       "id": "lidar",
@@ -73,7 +77,8 @@
         "deforestation": 7,
         "airQuality": 2
       },
-      "visualSlot": "rear-lidar"
+      "visualSlot": "rear-lidar",
+      "referenceId": "nasa-gedi"
     }
   ]
 }

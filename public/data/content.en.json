@@ -4,7 +4,7 @@
     "subtitle": "Space Mission Design",
     "tagline": "Design · Build · Plan · Launch",
     "intro": "Design your own Earth-observation mission by making engineering trade-offs under real-world style constraints.",
-    "disclaimer": "All numbers in this game are simplified, fictional teaching values. They are not real aerospace sizing data.",
+    "disclaimer": "Chromatic is an educational space mission design game inspired by NASA's systems engineering methodology and real Earth observation missions. Scientific instruments are based on technologies used in NASA missions, while numerical parameters, costs, reliability, and science scores are simplified for gameplay and do not represent official NASA specifications.",
     "loading": "Loading mission data…",
     "errorTitle": "The mission data could not be loaded",
     "errorBody": "Something is wrong with the game configuration files. Details are listed below. Fix the JSON files and reload the page.",
@@ -192,6 +192,9 @@
       "pickFirst": "Choose a launch vehicle to continue."
     },
     "review": {
+      "methodologyTitle": "Based on NASA Systems Engineering",
+      "methodologyBody": "Chromatic's mission design process is inspired by NASA's systems engineering methodology and JPL's Concept Maturity Levels (CMLs). Players define scientific objectives, explore engineering trade-offs, evaluate feasibility, and finalize a simplified mission configuration.",
+      "opensNewTab": "opens in a new tab",
       "title": "Mission Review",
       "subtitle": "Check the design before you commit to launch.",
       "checklist": "Launch checklist",
@@ -566,11 +569,11 @@
   "payload": {
     "multispectralCamera": {
       "name": "Multispectral Camera",
-      "description": "Captures data in several wavelengths, helping monitor vegetation, water and land-use change."
+      "description": "Captures data in several wavelengths, helping monitor vegetation, water and land-use change. Did you know? This is inspired by Landsat 9's OLI-2, which captures images in 9 spectral bands. Each band reveals something different about Earth's surface: near-infrared helps judge vegetation health, and shortwave infrared helps spot moisture conditions and burned areas. Most bands see details of 30 m; the panchromatic band sees 15 m. Wide band coverage means more science for deforestation and wildfire goals. (Real NASA instrument facts; the game's numbers are simplified.)"
     },
     "thermalSensor": {
       "name": "Thermal Sensor",
-      "description": "Sees heat, making it the best tool for spotting and tracking wildfires."
+      "description": "Sees heat, making it the best tool for spotting and tracking wildfires. Did you know? This is inspired by Landsat 9's TIRS-2, which measures thermal infrared radiation in 2 spectral bands. These measurements help estimate surface temperature and reveal thermal patterns, which makes it the best tool for spotting and tracking wildfires. Its native resolution is 100 m, coarser than a camera but enough to see heat. (Real NASA instrument facts; the game's numbers are simplified.)"
     },
     "atmosphericSpectrometer": {
       "name": "Atmospheric Spectrometer",

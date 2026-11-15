@@ -31,6 +31,15 @@ export function mountMissionReview(ctx) {
   const verdict = h('p', { class: 'verdict', role: 'status' });
   const approve = h('button', { type: 'button', class: 'btn btn--primary btn--launch', onClick: act.approve, text: t('screen.review.approve') });
 
+  const methodSources = data.sources.filter((s) => s.type === 'methodology' && s.url);
+  const methodology = methodSources.length
+    ? h('section', { class: 'method', 'aria-labelledby': 'method-title' },
+      h('h3', { class: 'method__title', id: 'method-title', text: t('screen.review.methodologyTitle') }),
+      h('p', { class: 'method__text', text: t('screen.review.methodologyBody') }),
+      h('ul', { class: 'method__links' }, methodSources.map((s) => h('li', null,
+        h('a', { href: s.url, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `${s.organization} — ${s.title} (${t('screen.review.opensNewTab')})`, text: `${s.organization} — ${s.title}` })))))
+    : null;
+
   const el = h(
     'section',
     { class: 'screen screen--review' },
@@ -41,7 +50,7 @@ export function mountMissionReview(ctx) {
       summaryHost),
     h('article', { class: 'panel' },
       h('h2', { class: 'panel__title', text: t('screen.review.checklist') }),
-      checkHost, verdict, approve),
+      checkHost, verdict, approve, methodology),
   );
 
   function row(label, value, step) {
