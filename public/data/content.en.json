@@ -34,6 +34,18 @@
     "edit": "Edit",
     "skipToContent": "Skip to content"
   },
+  "audio": {
+    "controls": "Sound settings",
+    "music": "Music",
+    "effects": "Sound effects",
+    "on": "On",
+    "off": "Off",
+    "credits": "Audio credits",
+    "creditsTitle": "Audio credits",
+    "creditsIntro": "Music and sound effects come from Freesound.org and are used under the licenses listed below.",
+    "creditsLine": "“{title}” by {author} ({license})",
+    "creditsSource": "Source"
+  },
   "units": {
     "kg": "kg",
     "w": "W",

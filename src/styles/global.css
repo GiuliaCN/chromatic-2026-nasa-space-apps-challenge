@@ -85,6 +85,10 @@ img, svg { display: block; max-width: 100%; }
 .progress { text-align: right; text-transform: uppercase; letter-spacing: 0.06em; font-size: 12px; color: var(--muted); }
 .progress__value { display: block; color: var(--primary); font-family: var(--font-display); font-size: 20px; letter-spacing: 0.04em; }
 .topbar__tools { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+.audio-toggles { display: flex; gap: 6px; flex-wrap: wrap; }
+.audio-toggle__state { color: var(--primary); }
+.audio-toggle[aria-pressed='false'] { border-style: dashed; color: var(--muted); }
+.audio-toggle[aria-pressed='false'] .audio-toggle__state { color: var(--muted); }
 
 .stepper { padding: 8px 14px 10px; border: 1px solid rgba(23, 97, 138, 0.6); border-radius: var(--radius); background: rgba(7, 24, 44, 0.6); }
 .stepper__list { display: flex; justify-content: space-between; }
@@ -327,6 +331,8 @@ img, svg { display: block; max-width: 100%; }
 .glossary dt { font-weight: 700; color: var(--primary); margin-top: 8px; }
 .glossary dd { color: var(--text); }
 .howto { display: grid; gap: 8px; padding-left: 20px; list-style: decimal; }
+.credits { display: grid; gap: 8px; }
+.credits a { color: var(--primary); }
 
 .fatal { max-width: 720px; margin: 10vh auto; padding: 28px; border: 1px solid var(--danger); border-radius: 16px; background: var(--danger-bg); display: grid; gap: 14px; }
 .fatal ul { list-style: disc; padding-left: 20px; display: grid; gap: 4px; }

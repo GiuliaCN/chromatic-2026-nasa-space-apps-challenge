@@ -31,6 +31,7 @@
 .menu__intro { font-style: italic; max-width: 520px; font-size: 17px; }
 .menu__notice { padding: 10px 14px; border: 1px solid var(--warning); border-radius: var(--radius-sm); background: rgba(255, 191, 54, 0.1); max-width: 520px; }
 .menu__buttons { display: grid; gap: 12px; }
+.menu__sound { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 .menu__disclaimer { color: var(--muted); font-size: 12px; max-width: 520px; }
 
 /* ---------- briefing --------------------------------------------------------------------- */

@@ -61,6 +61,38 @@ describe('config-validator', () => {
     assert.match(joined(r), /observationMultiplierByGoal\.airQuality/);
   });
 
+  it('requires every sound effect the UI plays', () => {
+    const r = validate((raw) => (raw.audio.effects = raw.audio.effects.filter((e) => e.id !== 'purchase')));
+    assert.match(joined(r), /effect "purchase" is missing/);
+  });
+
+  it('rejects sound files outside public/ (absolute paths, external URLs, "..")', () => {
+    for (const src of ['https://example.com/a.mp3', '//cdn.example.com/a.mp3', '/audio/a.mp3', '../secret.mp3', 'data:audio/wav;base64,AAAA']) {
+      const r = validate((raw) => (raw.audio.effects[0].src = src));
+      assert.match(joined(r), /relative path inside public/, src);
+    }
+  });
+
+  it('rejects sound volumes outside 0 to 1', () => {
+    const r = validate((raw) => (raw.audio.music[0].volume = 1.5));
+    assert.match(joined(r), /"volume" must be between 0 and 1/);
+  });
+
+  it('rejects music mapped to an unknown track or screen, but accepts silence (null)', () => {
+    const r1 = validate((raw) => (raw.audio.musicByScreen.orbit = 'disco'));
+    assert.match(joined(r1), /musicByScreen\.orbit" must be a music id or null/);
+    const r2 = validate((raw) => (raw.audio.musicByScreen.hangar = 'menu'));
+    assert.match(joined(r2), /unknown screen "hangar"/);
+    const r3 = validate((raw) => delete raw.audio.musicByScreen.debrief);
+    assert.match(joined(r3), /musicByScreen\.debrief/);
+    assert.equal(validate((raw) => (raw.audio.musicByScreen.review = null)).ok, true);
+  });
+
+  it('requires credits with title, author, license and url', () => {
+    const r = validate((raw) => delete raw.audio.credits[0].license);
+    assert.match(joined(r), /"credits" must be a list/);
+  });
+
   it('does not throw on a completely broken bundle', () => {
     assert.doesNotThrow(() => validateConfig(null));
     assert.doesNotThrow(() => validateConfig(createBundle({})));

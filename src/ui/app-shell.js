@@ -20,8 +20,10 @@ import {
 import { resolveSelection } from '../core/calculations.js';
 import { validateDesign } from '../core/validation.js';
 import { generateSeed } from '../core/rng.js';
-import { clearSave, hasSave, loadState, saveState } from '../core/storage.js';
+import { clearSave, hasSave, loadAudioPrefs, loadState, saveAudioPrefs, saveState } from '../core/storage.js';
 import { createDialogs } from './components/help-drawer.js';
+import { createAudioToggles } from './components/audio-toggle.js';
+import { attachUiSounds, createAudio } from './audio.js';
 import { CHROME, isPlanning, nextScreen, prevScreen, stepComplete } from './navigation.js';
 import { createStepIcon } from './icons.js';
 
@@ -50,7 +52,9 @@ const SCREENS = {
 };
 
 export function createApp({ root, data, t, store, storage, notice }) {
-  const dialogs = createDialogs({ t });
+  const audio = createAudio({ config: data.audio, prefs: loadAudioPrefs(storage), onChange: (prefs) => saveAudioPrefs(storage, prefs) });
+  attachUiSounds(audio);
+  const dialogs = createDialogs({ t, audio });
 
   // ---- derived values (memoised per state object) -------------------------------------------
   let memo = { state: null, value: null };
@@ -64,17 +68,27 @@ export function createApp({ root, data, t, store, storage, notice }) {
 
   // ---- actions ------------------------------------------------------------------------------
   const update = (fn) => store.update(fn);
+  // Picking a new piece of equipment plays the purchase sound instead of the plain click.
+  const purchase = (field, select) => (id) => {
+    const before = store.getState()[field];
+    update((s) => select(s, id));
+    if (store.getState()[field] !== before) audio.effect('purchase');
+  };
   const act = {
     goto: (screen) => update((s) => goTo(s, screen)),
     next: () => update((s) => (nextScreen(s.screen) ? goTo(s, nextScreen(s.screen)) : s)),
     back: () => update((s) => goTo(s, prevScreen(s.screen))),
     selectGoal: (id) => update((s) => selectGoal(s, id)),
     selectOrbit: (id) => update((s) => selectOrbit(s, id)),
-    togglePayload: (id) => update((s) => togglePayload(s, id)),
-    selectPower: (id) => update((s) => selectPower(s, id)),
-    selectComm: (id) => update((s) => selectComm(s, id)),
-    selectBus: (id) => update((s) => selectBus(s, id)),
-    selectLauncher: (id) => update((s) => selectLauncher(s, id)),
+    togglePayload: (id) => {
+      const adding = !store.getState().payloadIds.includes(id);
+      update((s) => togglePayload(s, id));
+      if (adding && store.getState().payloadIds.includes(id)) audio.effect('purchase');
+    },
+    selectPower: purchase('powerId', selectPower),
+    selectComm: purchase('communicationId', selectComm),
+    selectBus: purchase('busId', selectBus),
+    selectLauncher: purchase('launcherId', selectLauncher),
     approve: () => update((s) => approveLaunch(s, data, generateSeed())),
     finishSimulation: () => update((s) => finishSimulation(s)),
     skipAnimation: () => update((s) => (s.screen === 'animation' ? goTo(s, 'simulation') : s)),
@@ -103,7 +117,7 @@ export function createApp({ root, data, t, store, storage, notice }) {
     },
   };
 
-  const ctx = { data, t, store, act, dialogs, derive, storage, hasSave: () => hasSave(storage), notice };
+  const ctx = { data, t, store, act, dialogs, audio, derive, storage, hasSave: () => hasSave(storage), notice };
 
   // ---- chrome -------------------------------------------------------------------------------
   const logo = h('img', { class: 'logo', src: `${import.meta.env?.BASE_URL ?? './'}logo.jpeg`, alt: t('app.logoAlt'), width: 96, height: 96 });
@@ -113,12 +127,13 @@ export function createApp({ root, data, t, store, storage, notice }) {
   const whyBtn = h('button', { type: 'button', class: 'btn btn--ghost', onClick: () => dialogs.help(store.getState().screen), text: t('nav.why') });
   const glossBtn = h('button', { type: 'button', class: 'btn btn--ghost', onClick: () => dialogs.glossary(), text: t('nav.glossary') });
   const menuBtn = h('button', { type: 'button', class: 'btn btn--ghost', onClick: act.toMenu, text: t('nav.menu') });
+  const soundToggles = createAudioToggles({ t, audio });
   const topbar = h(
     'header',
     { class: 'topbar' },
     logo,
     h('div', { class: 'topbar__titles' }, titleEl, subtitleEl),
-    h('div', { class: 'topbar__right' }, progressEl, h('div', { class: 'topbar__tools' }, whyBtn, glossBtn, menuBtn)),
+    h('div', { class: 'topbar__right' }, progressEl, h('div', { class: 'topbar__tools' }, whyBtn, glossBtn, menuBtn, soundToggles.el)),
   );
 
   const stepperList = h('ol', { class: 'stepper__list' });
@@ -189,6 +204,7 @@ export function createApp({ root, data, t, store, storage, notice }) {
 
   function render(state) {
     renderChrome(state);
+    audio.setScreen(state.screen);
     if (current.screen !== state.screen) {
       current.view?.destroy?.();
       current = { screen: state.screen, view: SCREENS[state.screen](ctx) };

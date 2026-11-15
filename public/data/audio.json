@@ -1,0 +1,42 @@
+{
+  "musicFadeMs": 700,
+  "music": [
+    { "id": "menu", "src": "audio/music/main-menu.mp3", "volume": 0.35 },
+    { "id": "mission", "src": "audio/music/game-loop.wav", "volume": 0.45 }
+  ],
+  "musicByScreen": {
+    "menu": "menu",
+    "briefing": "mission",
+    "orbit": "mission",
+    "payload": "mission",
+    "spacecraft": "mission",
+    "launch": "mission",
+    "review": "mission",
+    "animation": "mission",
+    "simulation": "mission",
+    "debrief": "mission"
+  },
+  "effects": [
+    { "id": "click", "src": "audio/sfx/button-click.wav", "volume": 0.5 },
+    { "id": "hover", "src": "audio/sfx/button-hover.wav", "volume": 0.2 },
+    { "id": "purchase", "src": "audio/sfx/purchase.mp3", "volume": 0.55 },
+    { "id": "countdown", "src": "audio/sfx/launch-countdown.mp3", "volume": 0.7 },
+    { "id": "liftoff", "src": "audio/sfx/rocket-launch.mp3", "volume": 0.8 },
+    { "id": "arrive", "src": "audio/sfx/arrive.mp3", "volume": 0.6 },
+    { "id": "advice", "src": "audio/sfx/advice-notification.wav", "volume": 0.5 },
+    { "id": "eventNegative", "src": "audio/sfx/unexpected-event.mp3", "volume": 0.5 },
+    { "id": "eventPositive", "src": "audio/sfx/advice-notification.wav", "volume": 0.5 }
+  ],
+  "credits": [
+    { "title": "Making Up (Soft Hip Hop)", "author": "shortiefoeva2", "license": "CC0 1.0", "url": "https://freesound.org/people/shortiefoeva2/sounds/412048/" },
+    { "title": "Ambient, Pad, Guitar - Dawning", "author": "Andrewkn", "license": "CC BY 4.0", "url": "https://freesound.org/s/859582/" },
+    { "title": "Menu Selection Click", "author": "NenadSimic", "license": "CC0 1.0", "url": "https://freesound.org/people/NenadSimic/sounds/171697/" },
+    { "title": "Hint", "author": "dland", "license": "CC0 1.0", "url": "https://freesound.org/people/dland/sounds/320181/" },
+    { "title": "Purchase Ka-Ching", "author": "Qvantor", "license": "CC0 1.0", "url": "https://freesound.org/people/Qvantor/sounds/878619/" },
+    { "title": "Race Start Ready Go", "author": "steel2008", "license": "CC0 1.0", "url": "https://freesound.org/people/steel2008/sounds/231277/" },
+    { "title": "Rocket Launch", "author": "gracenew", "license": "CC0 1.0", "url": "https://freesound.org/people/gracenew/sounds/857959/" },
+    { "title": "Tada Fanfare A", "author": "plasterbrain", "license": "CC0 1.0", "url": "https://freesound.org/people/plasterbrain/sounds/397355/" },
+    { "title": "Notification Sound", "author": "yfjesse", "license": "CC0 1.0", "url": "https://freesound.org/people/yfjesse/sounds/235911/" },
+    { "title": "Liminal Space Alarm (excerpt)", "author": "Johnmode", "license": "CC0 1.0", "url": "https://freesound.org/people/Johnmode/sounds/861800/" }
+  ]
+}

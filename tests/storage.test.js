@@ -11,7 +11,17 @@ import {
   togglePayload,
   tryAgain,
 } from '../src/core/game-state.js';
-import { SAVE_KEY, loadState, saveState, serializeState } from '../src/core/storage.js';
+import {
+  AUDIO_PREFS_KEY,
+  DEFAULT_AUDIO_PREFS,
+  SAVE_KEY,
+  clearSave,
+  loadAudioPrefs,
+  loadState,
+  saveAudioPrefs,
+  saveState,
+  serializeState,
+} from '../src/core/storage.js';
 
 const data = loadData();
 
@@ -138,5 +148,36 @@ describe('storage', () => {
     };
     assert.equal(saveState(broken, planned()), false);
     assert.deepEqual(loadState(broken, data), { state: null });
+  });
+});
+
+describe('audio preferences', () => {
+  it('default to sound on when nothing is saved', () => {
+    assert.deepEqual(loadAudioPrefs(memoryStorage()), DEFAULT_AUDIO_PREFS);
+    assert.deepEqual(DEFAULT_AUDIO_PREFS, { music: true, effects: true });
+  });
+
+  it('round-trip and survive a new mission (separate key from the save)', () => {
+    const storage = memoryStorage();
+    assert.equal(saveAudioPrefs(storage, { music: false, effects: true }), true);
+    saveState(storage, planned());
+    clearSave(storage);
+    assert.deepEqual(loadAudioPrefs(storage), { music: false, effects: true });
+  });
+
+  it('fall back to the defaults for corrupted or partial values', () => {
+    assert.deepEqual(loadAudioPrefs(memoryStorage({ [AUDIO_PREFS_KEY]: '{oops' })), DEFAULT_AUDIO_PREFS);
+    assert.deepEqual(loadAudioPrefs(memoryStorage({ [AUDIO_PREFS_KEY]: '"muted"' })), DEFAULT_AUDIO_PREFS);
+    assert.deepEqual(loadAudioPrefs(memoryStorage({ [AUDIO_PREFS_KEY]: '{"music":"no","effects":false}' })), { music: true, effects: false });
+  });
+
+  it('never throw when storage is unavailable', () => {
+    const broken = {
+      getItem() { throw new Error('denied'); },
+      setItem() { throw new Error('quota'); },
+      removeItem() { throw new Error('denied'); },
+    };
+    assert.deepEqual(loadAudioPrefs(broken), DEFAULT_AUDIO_PREFS);
+    assert.equal(saveAudioPrefs(broken, { music: false, effects: false }), false);
   });
 });
