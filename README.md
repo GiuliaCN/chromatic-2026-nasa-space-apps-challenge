@@ -1,6 +1,6 @@
 # Chromatic: Space Mission Designer
 
-**Design. Decide. Discover.** A 2D web systems engineering game for the *NASA Space Apps Challenge 2026* (challenge 13, *Space Mission Design Game*). The player designs a fictional Earth observation mission (**Earth Watchers**), launches and operates the satellite for **24 months**, and receives a report explaining how their choices shaped the outcome.
+**Every choice has a cost. Every failure is a lesson.** A 2D web systems engineering game for the *NASA Space Apps Challenge 2026* (challenge 13, *Space Mission Design Game*). The player designs a fictional Earth observation mission (**Earth Watchers**), launches and operates the satellite for **24 months**, and receives a report explaining how their choices shaped the outcome.
 
 - Static frontend (HTML + CSS + JavaScript ES modules + SVG). No backend, login, database, APIs, or keys.
 - The game is in **English**.
@@ -8,7 +8,7 @@
 - Every scientific instruments **are based on technologies used in real NASA missions**.
 - Numerical parameters, costs, reliability, and science scores **are simplified for gameplay purposes** and do not represent official NASA specifications.
 
-You can play the deployed version [here](https://giuliacn.github.io/chromatic-2026-nasa-space-apps-challenge/).
+You can play the deployed version [here](https://chromaticspacemissiondesign.pages.dev/).
 
 ## Simplified model and scientific limitations
 
