@@ -48,7 +48,7 @@ export function mountMissionDebrief(ctx) {
   });
 
   const warnItems = check.warnings;
-  console.log("LOL")
+
   const el = h(
     'section',
     { class: `screen screen--debrief ${report.success ? 'is-success' : 'is-failure'}` },
