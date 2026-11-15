@@ -412,19 +412,19 @@
     },
     "briefing": {
       "title": "Why does this matter?",
-      "body": "Real missions start from a science question and a budget. Choosing a priority focuses the mission, but it also leaves other goals with less science. There is no single right answer."
+      "body": "NASA missions begin with scientific questions, not spacecraft hardware. Engineers translate science objectives into measurable requirements that guide instrument selection, orbit design, and mission planning. In Chromatic, your scientific priority plays the same role: it shapes every decision that follows."
     },
     "orbit": {
       "title": "Why does this matter?",
-      "body": "The orbit decides what the satellite can see, how often, and how long it sits in Earth's shadow. It also changes launch cost and which rockets can reach it."
+      "body": "Orbit determines where, when, and how often a satellite observes Earth. Landsat 9 uses a sun-synchronous orbit to observe locations under similar lighting conditions, making changes easier to compare over time. Different orbits involve trade-offs in coverage, revisit time, illumination, and power availability."
     },
     "payload": {
       "title": "Why does this matter?",
-      "body": "Instruments create the science, but each one adds mass, power draw and data to carry home. Every extra instrument raises the demands on the rest of the spacecraft."
+      "body": "NASA missions use different instruments to reveal different aspects of Earth. Landsat 9 observes reflected light and thermal radiation, NISAR uses radar to study surface changes, GEDI uses lasers to measure forest structure, and TEMPO measures atmospheric pollution. Choosing an instrument means choosing what your mission can discover—and what resources it will need."
     },
     "spacecraft": {
       "title": "Why does this matter?",
-      "body": "A spacecraft is a system: power feeds instruments, communications send the data home, and the bus holds everything together. A weak link limits the whole mission."
+      "body": "NASA systems engineering considers the spacecraft as a connected whole. Instruments need electrical power, onboard storage, communication links, and structural support. Engineers also plan margins to handle uncertainty and degradation. A powerful instrument is only useful if the rest of the spacecraft can support it."
     },
     "launch": {
       "title": "Why does this matter?",
@@ -432,7 +432,7 @@
     },
     "review": {
       "title": "Why does this matter?",
-      "body": "Engineers hold design reviews before launch because there is no repair visit later. Blockers are hard limits; warnings are risks that may cost science."
+      "body": "NASA evaluates mission concepts through engineering reviews before committing to construction and launch. JPL's Concept Maturity Levels describe how a mission concept develops from early scientific goals into a more detailed, feasible design. Chromatic simplifies this process: resolve hard constraints, assess risks, and decide whether your mission is ready."
     },
     "animation": {
       "title": "Why does this matter?",
@@ -440,7 +440,7 @@
     },
     "simulation": {
       "title": "Why does this matter?",
-      "body": "Operations are where design choices pay off. Science only counts once data reaches Earth, so power, storage and downlink all matter every month."
+      "body": "Collecting observations is only part of a NASA science mission. Data must also be stored, transmitted to ground stations, processed, and made available for scientific analysis. Limited power, communication opportunities, and equipment anomalies can reduce a mission's scientific return. In Chromatic, only successfully transmitted data earns science points."
     },
     "debrief": {
       "title": "Why does this matter?",
