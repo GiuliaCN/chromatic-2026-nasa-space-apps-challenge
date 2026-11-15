@@ -68,27 +68,17 @@ export function createApp({ root, data, t, store, storage, notice }) {
 
   // ---- actions ------------------------------------------------------------------------------
   const update = (fn) => store.update(fn);
-  // Picking a new piece of equipment plays the purchase sound instead of the plain click.
-  const purchase = (field, select) => (id) => {
-    const before = store.getState()[field];
-    update((s) => select(s, id));
-    if (store.getState()[field] !== before) audio.effect('purchase');
-  };
   const act = {
     goto: (screen) => update((s) => goTo(s, screen)),
     next: () => update((s) => (nextScreen(s.screen) ? goTo(s, nextScreen(s.screen)) : s)),
     back: () => update((s) => goTo(s, prevScreen(s.screen))),
     selectGoal: (id) => update((s) => selectGoal(s, id)),
     selectOrbit: (id) => update((s) => selectOrbit(s, id)),
-    togglePayload: (id) => {
-      const adding = !store.getState().payloadIds.includes(id);
-      update((s) => togglePayload(s, id));
-      if (adding && store.getState().payloadIds.includes(id)) audio.effect('purchase');
-    },
-    selectPower: purchase('powerId', selectPower),
-    selectComm: purchase('communicationId', selectComm),
-    selectBus: purchase('busId', selectBus),
-    selectLauncher: purchase('launcherId', selectLauncher),
+    togglePayload: (id) => update((s) => togglePayload(s, id)),
+    selectPower: (id) => update((s) => selectPower(s, id)),
+    selectComm: (id) => update((s) => selectComm(s, id)),
+    selectBus: (id) => update((s) => selectBus(s, id)),
+    selectLauncher: (id) => update((s) => selectLauncher(s, id)),
     approve: () => update((s) => approveLaunch(s, data, generateSeed())),
     finishSimulation: () => update((s) => finishSimulation(s)),
     skipAnimation: () => update((s) => (s.screen === 'animation' ? goTo(s, 'simulation') : s)),

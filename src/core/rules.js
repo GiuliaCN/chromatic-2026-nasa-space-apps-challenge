@@ -43,7 +43,6 @@ export const HELP_SCREENS = SCREENS;
 export const SOUND_EFFECTS = [
   'click',
   'hover',
-  'purchase',
   'countdown',
   'liftoff',
   'arrive',

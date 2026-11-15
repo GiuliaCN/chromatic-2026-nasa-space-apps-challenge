@@ -62,8 +62,8 @@ describe('config-validator', () => {
   });
 
   it('requires every sound effect the UI plays', () => {
-    const r = validate((raw) => (raw.audio.effects = raw.audio.effects.filter((e) => e.id !== 'purchase')));
-    assert.match(joined(r), /effect "purchase" is missing/);
+    const r = validate((raw) => (raw.audio.effects = raw.audio.effects.filter((e) => e.id !== 'click')));
+    assert.match(joined(r), /effect "click" is missing/);
   });
 
   it('rejects sound files outside public/ (absolute paths, external URLs, "..")', () => {
