@@ -11,7 +11,18 @@ const CAPTIONS = ['stage1', 'stage2', 'stage3', 'stage4', 'stage5', 'stage6'];
 const STAGE_SOUNDS = { 1: 'countdown', 2: 'liftoff', 6: 'arrive' }; // effect ids from audio.json
 
 function tower() {
-  const g = s('g', { class: 'anim-tower' });
+  const scale = 0.7;
+  const anchorX = 198;
+  const anchorY = 540;
+
+  const g = s('g', {
+    class: 'anim-tower',
+    transform: `
+    translate(${anchorX} ${anchorY})
+    scale(${scale})
+    translate(${-anchorX} ${-anchorY})
+  `
+  });
   g.append(s('rect', { x: 130, y: 150, width: 16, height: 400, fill: '#27375a' }), s('rect', { x: 250, y: 150, width: 16, height: 400, fill: '#27375a' }));
   for (let y = 170; y < 540; y += 46) {
     g.append(s('path', { d: `M146 ${y} L250 ${y + 46} M250 ${y} L146 ${y + 46}`, stroke: '#f0a24a', 'stroke-width': 4, fill: 'none' }), s('rect', { x: 130, y, width: 136, height: 5, fill: '#f0a24a' }));
@@ -135,7 +146,7 @@ export function mountLaunchAnimation(ctx) {
 
   return {
     el,
-    update() {},
+    update() { },
     destroy() {
       clearTimeout(timer);
       clearInterval(countdownTimer);
