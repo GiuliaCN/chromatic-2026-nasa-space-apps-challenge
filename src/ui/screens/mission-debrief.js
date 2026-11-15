@@ -37,7 +37,7 @@ export function mountMissionDebrief(ctx) {
   });
 
   const byKind = (kind) => report.insights.filter((i) => i.kind === kind);
-  const list = (items2, tone) => h('ul', { class: `insights insights--${tone}` }, items2.map((i) => h('li', null, h('span', { 'aria-hidden': 'true', text: tone === 'good' ? '✓ ' : tone === 'bad' ? '✕ ' : 'i ' }), i.text)));
+  const list = (items2, tone) => h('ul', { class: `insights insights--${tone}` }, items2.map((i) => h('li', null, h('span', { 'aria-hidden': 'true', text: tone === 'good' ? '✓ ' : tone === 'bad' ? '✕ ' : 'ⓘ ' }), i.text)));
 
   const eventRows = report.events.map((e) => {
     const def = data.byId.events.get(e.eventId);
