@@ -12,6 +12,7 @@ export const DATA_FILES = {
   launchers: 'launchers.json',
   events: 'events.json',
   audio: 'audio.json',
+  sources: 'sources.json',
 };
 
 function indexById(list) {
@@ -41,6 +42,7 @@ export function createBundle(raw) {
     launchers: raw.launchers?.launchers ?? [],
     events: raw.events?.events ?? [],
     audio: raw.audio ?? {},
+    sources: raw.sources?.sources ?? [],
   };
   bundle.byId = {
     goals: indexById(bundle.goals),
@@ -51,6 +53,7 @@ export function createBundle(raw) {
     comms: indexById(bundle.comms),
     launchers: indexById(bundle.launchers),
     events: indexById(bundle.events),
+    sources: indexById(bundle.sources),
   };
   return bundle;
 }

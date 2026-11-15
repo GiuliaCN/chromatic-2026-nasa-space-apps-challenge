@@ -1,0 +1,72 @@
+{
+    "sources": [
+        {
+            "id": "nasa-mission-design",
+            "organization": "NASA",
+            "title": "Design and Develop Science Missions",
+            "year": 2025,
+            "url": "https://www.nasa.gov/wp-content/uploads/2025/04/250323-design-and-develop-science-mission.pdf?emrc=a454cf",
+            "type": "methodology",
+            "usage": "Mission design workflow and systems engineering"
+        },
+        {
+            "id": "nasa-cml",
+            "organization": "NASA Jet Propulsion Laboratory",
+            "title": "Concept Maturity Levels (CMLs)",
+            "url": "https://dataverse.jpl.nasa.gov/file.xhtml?fileId=50237&version=2.0",
+            "type": "methodology",
+            "usage": "Mission concept development, feasibility assessment, architectural trade studies, and preliminary spacecraft design",
+            "appliedLevels": [1, 2, 3, 4]
+        },
+        {
+            "id": "nasa-landsat9-oli2",
+            "organization": "NASA",
+            "title": "Operational Land Imager (OLI) - Landsat 9",
+            "url": "https://science.nasa.gov/mission/landsat/oli/",
+            "type": "technical-reference",
+            "usage": "Inspiration for multispectral instrument",
+            "usage_title": "Inspired by NASA's Landsat 9 OLI-2",
+            "usage_description": "Multispectral imaging helps scientists monitor vegetation, land-cover changes and wildfire impacts. Engineering values are simplified for gameplay."
+        },
+        {
+            "id": "nasa-landsat9-tirs2",
+            "organization": "NASA",
+            "title": "Thermal Infrared Sensor (TIRS) - Landsat 9",
+            "url": "https://science.nasa.gov/mission/landsat/tirs/",
+            "type": "technical-reference",
+            "usage": "Inspiration for thermal instrument",
+            "usage_title": "Inspired by NASA's Landsat 9 TIRS-2",
+            "usage_description": "Thermal imaging helps scientists monitor temperature variations and heat signatures. Engineering values are simplified for gameplay."
+        },
+        {
+            "id": "nasa-tempo",
+            "organization": "NASA",
+            "title": "Tropospheric Emissions: Monitoring of POllution (TEMPO)",
+            "url": "https://science.nasa.gov/mission/tempo/",
+            "type": "technical-reference",
+            "usage": "Inspiration for atmospheric instrument",
+            "usage_title": "Inspired by NASA's TEMPO mission",
+            "usage_description": "Thermal imaging helps scientists monitor temperature variations and heat signatures. Engineering values are simplified for gameplay."
+        },
+        {
+            "id": "nasa-nisar",
+            "organization": "NASA",
+            "title": "NISAR (NASA-ISRO Synthetic Aperture Radar)",
+            "url": "https://science.nasa.gov/mission/nisar/",
+            "type": "technical-reference",
+            "usage": "Inspiration for synthetic aperture radar instrument",
+            "usage_title": "Inspired by NASA's NISAR mission",
+            "usage_description": "Synthetic aperture radar imaging helps scientists monitor Earth's surface changes and natural disasters. Engineering values are simplified for gameplay."
+        },
+        {
+            "id": "nasa-gedi",
+            "organization": "NASA",
+            "title": "Global Ecosystem Dynamics Investigation (GEDI)",
+            "url": "https://science.nasa.gov/mission/gedi/",
+            "type": "technical-reference",
+            "usage": "Inspiration for lidar instrument",
+            "usage_title": "Inspired by NASA's GEDI mission",
+            "usage_description": "Lidar imaging helps scientists monitor forest structure and biomass. Engineering values are simplified for gameplay."
+        }
+    ]
+}
