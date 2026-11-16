@@ -570,23 +570,23 @@
   "payload": {
     "multispectralCamera": {
       "name": "Multispectral Camera",
-      "description": "Captures data in several wavelengths, helping monitor vegetation, water and land-use change. Did you know? This is inspired by Landsat 9's OLI-2, which captures images in 9 spectral bands. Each band reveals something different about Earth's surface: near-infrared helps judge vegetation health, and shortwave infrared helps spot moisture conditions and burned areas. Most bands see details of 30 m; the panchromatic band sees 15 m. Wide band coverage means more science for deforestation and wildfire goals. (Real NASA instrument facts; the game's numbers are simplified.)"
+      "description": "Captures different wavelengths to monitor vegetation, water and land-use changes. Did you know? Inspired by Landsat 9's OLI-2, which observes Earth in 9 spectral bands. Near-infrared helps assess vegetation health, while shortwave infrared reveals moisture conditions and burned areas. Most bands have a 30 m resolution, while the panchromatic band reaches 15 m. These capabilities make multispectral imaging valuable for tracking deforestation and wildfires. (Real NASA instrument facts; game values are simplified.)"
     },
     "thermalSensor": {
       "name": "Thermal Sensor",
-      "description": "Sees heat, making it the best tool for spotting and tracking wildfires. Did you know? This is inspired by Landsat 9's TIRS-2, which measures thermal infrared radiation in 2 spectral bands. These measurements help estimate surface temperature and reveal thermal patterns, which makes it the best tool for spotting and tracking wildfires. Its native resolution is 100 m, coarser than a camera but enough to see heat. (Real NASA instrument facts; the game's numbers are simplified.)"
+      "description": "Detects surface heat, helping identify and monitor wildfires. Did you know? Inspired by Landsat 9's TIRS-2, which measures thermal infrared radiation in 2 spectral bands. These measurements help scientists estimate Earth's surface temperature, monitor water stress in crops and study heat patterns. Its native resolution is 100 m, making it less detailed than optical cameras but useful for detecting temperature differences. (Real NASA instrument facts; game values are simplified.)"
     },
     "atmosphericSpectrometer": {
       "name": "Atmospheric Spectrometer",
-      "description": "Measures gases in the air. Light, cheap and the key to air-quality science."
+      "description": "Measures atmospheric gases to study pollution and air quality. Did you know? Inspired by NASA's TEMPO instrument, which observes pollutants such as nitrogen dioxide, ozone and formaldehyde using ultraviolet and visible light. From geostationary orbit, TEMPO scans North America about once every daylight hour, revealing how pollution changes throughout the day. This helps scientists track emissions from cities, industries and wildfires. (Real NASA instrument facts; game values are simplified.)"
     },
     "sar": {
       "name": "Synthetic Aperture Radar",
-      "description": "Sees through clouds and darkness. Powerful for forests, but heavy, hungry and data-heavy."
+      "description": "Uses radar to observe Earth's surface through clouds and darkness. Did you know? Inspired by NASA and ISRO's NISAR mission, which combines two radar wavelengths: L-band (24 cm) and S-band (9.4 cm). L-band can penetrate forest canopies to study vegetation and biomass, while S-band is sensitive to lighter vegetation. NISAR can observe Earth's surface day and night, with an average revisit time of about 6 days. (Real NASA instrument facts; game values are simplified.)"
     },
     "lidar": {
       "name": "LiDAR",
-      "description": "Laser ranging that measures canopy height. Compact and useful for forest structure."
+      "description": "Uses laser pulses to measure forest height and structure. Did you know? Inspired by NASA's GEDI instrument aboard the International Space Station, which uses 3 near-infrared lasers firing 242 times per second. Its laser footprints cover areas about 25 m wide, measuring the vertical structure of forests and the ground beneath their canopies. These measurements help scientists estimate forest biomass and understand how much carbon forests store. (Real NASA instrument facts; game values are simplified.)"
     }
   },
   "bus": {
