@@ -1,4 +1,4 @@
-# Chromatic: Space Mission Designer
+# Chromatic: Space Mission Design
 
 **Every choice has a cost. Every failure is a lesson.** A 2D web systems engineering game for the *NASA Space Apps Challenge 2026* (challenge 13, *Space Mission Design Game*). The player designs a fictional Earth observation mission (**Earth Watchers**), launches and operates the satellite for **24 months**, and receives a report explaining how their choices shaped the outcome.
 
