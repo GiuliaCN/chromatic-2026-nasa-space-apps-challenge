@@ -24,23 +24,27 @@ export function mountPayloadDesign(ctx) {
   let focusId = data.payloads[0]?.id;
   const whyTitle = h('h4', { class: 'why__title' });
   const whyText = h('p', { class: 'why__text' });
+  const whyRef = h('p', { class: 'why__ref' });
   const setFocus = (id) => {
     focusId = id;
     const p = data.byId.payloads.get(id);
     whyTitle.textContent = t(p.nameKey);
     whyText.textContent = t(p.descriptionKey);
+    const src = p.referenceId ? data.byId.sources.get(p.referenceId) : null;
+    whyRef.hidden = !src?.url;
+    whyRef.replaceChildren();
+    if (src?.url) {
+      whyRef.append(`${t('screen.payload.inspiredBy')} `, h('a', { href: src.url, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `${src.title} (${t('screen.review.opensNewTab')})`, text: src.title }));
+    }
   };
   setFocus(focusId);
 
   const cards = new Map();
   const cardEls = data.payloads.map((p) => {
-    const src = p.referenceId ? data.byId.sources.get(p.referenceId) : null;
-    const reference = src?.url && src.usage_title ? { url: src.url, label: src.usage_title, newTabLabel: t('screen.review.opensNewTab') } : null;
     const base = Object.values(p.scienceByGoal).reduce((a, b) => a + b, 0);
     const card = createChoiceCard({
       title: t(p.nameKey),
       multi: true,
-      reference,
       stats: [
         { label: t('screen.payload.baseScience'), value: `${base} ${t('units.pts')}` },
         { label: t('screen.payload.mass'), value: kg(p.massKg) },
@@ -79,7 +83,7 @@ export function mountPayloadDesign(ctx) {
       h('h2', { class: 'panel__title', text: t('screen.payload.selection') }),
       h('p', { class: 'panel__sub', text: t('screen.payload.selectionHint') }),
       h('div', { class: 'choice-list choice-list--dense', role: 'group', 'aria-label': t('screen.payload.selection') }, cardEls),
-      h('div', { class: 'why' }, h('h3', { class: 'why__head', text: t('nav.why') }), whyTitle, whyText)),
+      h('div', { class: 'why' }, h('h3', { class: 'why__head', text: t('nav.why') }), whyTitle, whyText, whyRef)),
   );
 
   return {

@@ -136,6 +136,7 @@
       "target": "Target {target} pts",
       "instrument": "Instrument",
       "baseScience": "Science (base)",
+      "inspiredBy": "Inspired by NASA:",
       "perGoal": "By goal",
       "none": "No instrument selected yet. Pick at least one.",
       "footer": "More instruments mean more science, but also more mass, power, data and cost.",
