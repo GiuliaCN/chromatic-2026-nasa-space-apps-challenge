@@ -114,8 +114,8 @@ function buildInstrument(id, slot) {
       break;
     case 'bottom-radar':
       g.append(
-        s('line', { x1: -26, y1: -16, x2: -34, y2: 2, stroke: '#7d8ea3', 'stroke-width': 3 }),
-        s('line', { x1: 26, y1: -16, x2: 34, y2: 2, stroke: '#7d8ea3', 'stroke-width': 3 }),
+        s('line', { x1: -26, y1: -34, x2: -42, y2: 2, stroke: '#7d8ea3', 'stroke-width': 3 }),
+        s('line', { x1: 26, y1: -34, x2: 42, y2: 2, stroke: '#7d8ea3', 'stroke-width': 3 }),
         s('rect', { x: -48, y: 0, width: 96, height: 12, rx: 3, fill: '#d6dfeb', stroke: '#51627a' }),
         s('path', { d: 'M-42 6H42', stroke: '#8a4bff', 'stroke-width': 3, 'stroke-dasharray': '6 4' }),
       );
